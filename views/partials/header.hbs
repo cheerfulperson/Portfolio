@@ -1,0 +1,82 @@
+<header class="Header flex-wrap flex-align-center sticky">
+    <div class="container com-padding flex-wrap flex-align-center position-relative">
+        <a id="logo" class="vertical-middle " href="/">
+            <img src="https://cdn.logo.com/hotlink-ok/enterprise/eid_422203f0-477b-492b-9847-689feab1452a/logo-dark-2020.png"
+                alt="logo">
+        </a>
+        <nav id="navBar" class="vertical-middle">
+            <div class="overlay-content">
+                <a href="/" class="nav-element position-relative animation-bottom-border"><span>Home</span></a>
+                <a href="" class="nav-element position-relative animation-bottom-border"><span>Pricing</span></a>
+                <a href="" class="nav-element position-relative animation-bottom-border"><span>Team</span></a>
+                <a href="" class="nav-element position-relative animation-bottom-border"><span>Contact</span></a>
+            </div>
+        </nav>
+        <div id="buttonsLog" class="vertical-middle ps-right">
+            <button id="btnLogIn" class="vertical-middle pretty-btn"><a href=""
+                    class="position-relative animation-bottom-border"><span>log in</span></a></button>
+            <button id="btnSignIn" class="position-relative vertical-middle pretty-btn"><a href=""><span>sign
+                        in</span></a></button>
+        </div>
+        <div id="blockOfBtnMenu" class="vertical-middle">
+            <button id="btnMenu" class="vertical-middle ">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</header>
+<script>
+    const header = document.querySelector('header.Header'),
+        btnMenu = document.getElementById('btnMenu'),
+        navBar = document.getElementById('navBar');
+
+    window.onscroll = changeHeader; // При скролинге
+    window.onresize = (e) => { // При изменении размера окна
+        if (window.innerWidth > 900) {
+            navBar.classList.remove('overlay');
+            header.classList.remove('show-color')
+        }
+    }
+
+    function changeHeader() {
+        header.style.transition = 'background 0.5s linear';
+        if (window.scrollY > 10) {
+            if (!header.classList.contains('show-color')) header.classList.toggle('show-color')
+        } else header.classList.remove('show-color')
+
+    }
+
+    btnMenu.addEventListener('click', dropNavBar);
+    
+    function addOrRemoveClass(el, className){
+        if(!el) return;
+        if (!el.classList.contains(className))
+            el.classList.toggle(className);
+        else
+            el.classList.remove(className);
+    }
+
+    function dropNavBar() {
+        // toggle() - если есть подкласс то удалит и наоборот
+        header.style.transition = "none";
+        addOrRemoveClass(header, 'show-color');
+        
+        addOrRemoveClass(navBar, 'overlay');
+
+        // Анимация кнопки меню(превращение в крестик)
+        for (let i = 0; i < btnMenu.children.length; i++) {
+            let el = btnMenu.children[i];
+            if (i === 0) {
+                addOrRemoveClass(el, 'rotate-45');
+            }else if(i === 1){
+                if (el.style.display != 'none')
+                    el.style.display = 'none';
+                else
+                    el.style.display = 'flex';
+            }else if(i === 2){
+                addOrRemoveClass(el, 'rotate-p-45');
+            }
+        }
+
+    }
+</script>

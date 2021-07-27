@@ -1,0 +1,376 @@
+/* Variables */
+:root {
+  // variables
+  --main-color-1: black;
+  --main-color-2: #0072E1;
+  --main-color-3: white;
+  --max-width: 1600px
+}
+
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/* Mixins */
+@mixin theme($theme: DarkGray) {
+  background: $theme;
+  box-shadow: 0 0 1px rgba($theme, .25);
+  color: #fff;
+}
+
+/* Псевдоэлементы */
+::selection {
+  color: var(--main-color-2);
+  background-color: var(--main-color-3);
+}
+
+/* Анимация */
+@keyframes changColor {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  height: 10000px;
+  font-family: 'Roboto', sans-serif;
+  background: rgb(145, 145, 145);
+}
+
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 56px;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--main-color-3);
+}
+
+
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+p {
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 21px;
+  text-align: center;
+  color: var(--main-color-3);
+}
+
+a {
+  color: var(--main-color-3);
+  text-decoration: none;
+}
+
+
+/* Header */
+.Header {
+  top: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 32;
+  transition: background 0.5s linear;
+}
+
+.show-color {
+  background: var(--main-color-1) !important;
+  box-shadow: 0 1px 4px 0 white;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: auto;
+}
+
+.com-padding {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.vertical-middle {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.Header>.container {
+  a>img {
+    width: 40px;
+  }
+
+  nav {
+    margin-left: 50px;
+
+    a {
+      // color: $color2;
+      text-align: center;
+      font-weight: 400;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+
+    a:hover {
+      text-shadow: -2px 2px 4px rgb(255, 255, 255);
+    }
+
+    a:not(:first-child) {
+      margin-left: 20px;
+    }
+  }
+
+  div>button#btnLogIn {
+    border: none;
+  }
+
+  div>button#btnSignIn {
+    transition: background 0.5s ease-in-out;
+  }
+
+  div>button#btnSignIn:hover {
+    background: var(--main-color-3);
+  }
+
+  div>button#btnSignIn a {
+    transition: color 0.5s ease-in-out;
+  }
+
+  div>button#btnSignIn:hover a {
+    color: black;
+  }
+
+  div#blockOfBtnMenu {
+    display: none;
+  }
+
+  div>button#btnMenu {
+    padding: 0;
+  }
+
+  div>button#btnMenu span {
+    display: none;
+    width: 32px;
+    height: 4px;
+    border-radius: 50px;
+    background: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.5s;
+  }
+
+  div>button#btnMenu span:not(:first-child) {
+    margin-top: 6px;
+  }
+
+}
+
+// ----> body
+
+// --------> Poster
+div.container>.pre-header-poster {
+  height: 600px;
+
+  .multi-media {
+    height: 100%;
+  }
+
+  .multi-media-content {
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+    video {
+      position: relative;
+      z-index: -1;
+      display: block;
+      min-width: 100%;
+      min-height: 100%;
+    }
+    img {
+      position: relative;
+      z-index: -1;
+      height: 100%;
+      min-width: 100%;
+      width: auto;
+      object-fit: cover;
+    }
+  }
+
+
+  div#blockOfDragElements {
+    top: 0;
+    position: absolute;
+    height: 100%;
+    flex-wrap: nowrap;
+    justify-content: center;
+
+    .container-item {
+      width: 10%;
+      height: 100%;
+  
+      #middleBlockOfPoster {
+        margin-top: 150px;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+
+        p {
+          margin-top: -40px;
+          max-width: 450px;
+        }
+      }
+    }
+    .container-item:nth-child(2) {
+      width: 80%;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .flex-col-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+    }
+    .beauty-btn{
+      padding: 20px 5px 20px 5px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      transition: background 0.5s;
+    }
+    .beauty-btn:hover{
+      background:rgba(255, 255, 255, 0.5)
+    }
+
+    div#countElements {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      margin-top: 180px;
+      width: 100%;
+      height: 20px;
+
+      span {
+        width: 25px;
+        height: 4px;
+        background: rgb(255, 255, 255);
+        opacity: 0.5;
+        border-radius: 10px;
+      }
+
+      :not(:first-child) {
+        margin-left: 5px;
+      }
+
+      .fill-color {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+
+/* Free classes */
+
+.text-shadow {
+  text-shadow: 1px 1px 2px #000000;
+}
+
+.ps-right {
+  margin-left: auto;
+}
+
+.vs-none {
+  display: none;
+}
+
+.sticky {
+  position: fixed;
+}
+
+.position-relative {
+  position: relative !important;
+}
+
+.position-absolute {
+  position: absolute !important;
+}
+
+.flex-wrap {
+  display: flex !important;
+}
+
+.flex-align-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.pretty-btn {
+  padding: 5px 8px 5px 8px;
+  border-radius: 2px;
+  border: 1px solid white;
+  font-size: 14px;
+}
+
+.base-btn-1 {
+  padding: 12px;
+  color: var(--main-color-3);
+  background: var(--main-color-2);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  transition-property: background, box-shadow;
+  transition-duration: 1s;
+}
+
+.base-btn-1:hover {
+  background: rgb(0, 80, 193);
+  box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
+}
+
+.base-btn-1 span {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.animation-bottom-border::after {
+  content: "";
+  position: absolute;
+  background: var(--main-color-3);
+  opacity: 0;
+  bottom: -10px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 2px;
+  width: 100%;
+
+  transition: all 0.2s linear;
+}
+
+.animation-bottom-border:hover:after {
+  bottom: -6px;
+  opacity: 1;
+}

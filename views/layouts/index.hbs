@@ -1,0 +1,101 @@
+{{!-- <h1 class="text-shadow" style="margin-top: 60px;">{{title}}</h1> --}}
+<div class="pre-header-poster position-relative">
+    <div id="multimedia" class="container multi-media">
+        <div class="multi-media-content vs-none" step="0">
+            <video class="videoPoster" autoplay loop muted>
+                <source src="/images/Intro - 81605.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="multi-media-content  vs-none">
+            <video class="videoPoster" autoplay loop muted>
+                <source src="/images/Youtube Intro - 79585.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="multi-media-content flex-wrap flex-align-center">
+            <img class="imagePoster" src="/images/success-2081168_1280.jpg" alt="">
+        </div>
+    </div>
+    <div class="container position-absolute flex-wrap flex-align-center" id="blockOfDragElements">
+        <div class="container-item flex-col-center">
+            <button id="preData" class="beauty-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white"
+                    class="bi bi-caret-left" viewBox="0 0 16 16">
+                    <path
+                        d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z" />
+                </svg>
+            </button>
+        </div>
+        <div id="middleDataBlock" class="container-item flex-col-center">
+            <div id="middleBlockOfPoster" class="flex-wrap flex-align-center">
+                <h2 class="text-shadow">BUILD YOUR FUTURE WITH US</h2>
+                <p class="text-shadow">Whatever the approach to development may be, the final
+                    program must satisfy somefundamental properties</p>
+                <button class="base-btn-1" style="text-transform: uppercase;"><span style="font;">get
+                        started</span></button>
+            </div>
+            <div id="countElements"><span class="counter"></span><span class="counter fill-color"></span><span
+                    class="counter"></span></div>
+        </div>
+        <div class="container-item flex-col-center">
+            <button id="postData" class="beauty-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white"
+                    class="bi bi-caret-right" viewBox="0 0 16 16">
+                    <path
+                        d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+<main>
+
+</main>
+<script>
+    const
+        videosPoster = document.querySelectorAll('.videoPoster'),
+        poster = document.querySelector('.pre-header-poster');
+
+    function getNumber(num = 0) {
+        return typeof num == 'string' ?
+            Number(num.split("").map(el => {
+                if (el == '.' || !isNaN(Number(el)))
+                    return el == '.' ? '.' : Number(el)
+            }).join("")) :
+            num;
+    }
+
+    function resize() { // Отвечает за оптимизацию стилей при загрузке и изменении страницы
+        videosPoster.forEach(el => resizeVideo(el));
+    }
+
+    function resizeVideo(el) {
+
+        // Настройка видео
+
+        let posterStyles = getComputedStyle(poster);
+        let videoStyles = getComputedStyle(el);
+        console.log(getNumber(posterStyles.width), getNumber(videoStyles.width))
+        if (getNumber(posterStyles.width) < getNumber(videoStyles.width)) {
+             // Меняем стилий
+            el.style.cssText = `
+                height: ${posterStyles.height};
+                left: ${"-" + (getNumber(videoStyles.width) - getNumber(posterStyles.width)) / 2 + "px;"}
+            `;
+        } else {
+            // Меняем стили
+            el.style.cssText = ` 
+                width: ${posterStyles.width};
+                top: ${"-" + (getNumber(videoStyles.height) - getNumber(posterStyles.height)) / 2 + "px;"}
+            `;
+           
+        }
+    }
+
+    window.onresize = resize;
+    window.onload = () => {
+        for (let el of videosPoster){
+            el.addEventListener('loadeddata', resize) 
+        }
+           
+    };
+</script>

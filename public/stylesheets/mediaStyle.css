@@ -1,0 +1,88 @@
+@media screen and (max-width: 900px) {
+  h2 {
+    font-size: 32px; }
+  .com-padding {
+    padding-left: 30px;
+    padding-right: 30px; }
+  .Header > .container #buttonsLog {
+    margin-right: 50px; }
+  .Header > .container div#blockOfBtnMenu {
+    display: block;
+    margin-right: 10px; }
+  .Header > .container a#logo > img {
+    width: 40px; }
+  .Header > .container nav#navBar {
+    display: none; }
+  .overlay {
+    position: fixed;
+    display: block !important;
+    margin-top: 60px;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 31;
+    left: -50px;
+    background: rgba(0, 0, 0, 0.8);
+    overflow-x: hidden;
+    transition: 0.5s; }
+    .overlay div.overlay-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 100%; }
+      .overlay div.overlay-content a {
+        text-align: left;
+        display: block;
+        font-size: 60px;
+        margin: 30px 0 0 20px !important; }
+  div.container > .pre-header-poster {
+    height: 500px; }
+    div.container > .pre-header-poster div#blockOfDragElements .container-item #middleBlockOfPoster {
+      margin-top: 140px; }
+      div.container > .pre-header-poster div#blockOfDragElements .container-item #middleBlockOfPoster p {
+        margin-top: -30px; }
+    div.container > .pre-header-poster div#blockOfDragElements div#countElements {
+      margin-top: 100px; }
+  .animation-bottom-border::after {
+    display: none; }
+  .rotate-45 {
+    transform: rotate(-45deg) translate(0px, 7px); }
+  .rotate-p-45 {
+    transform: rotate(45deg) translate(0px, -7px); } }
+
+@media screen and (max-width: 600px) {
+  h2 {
+    font-size: 18px; }
+  .com-padding {
+    padding-left: 10px;
+    padding-right: 10px; }
+  .Header > .container a#logo > img {
+    width: 40px; }
+  .Header > .container nav {
+    display: none;
+    margin-left: 50px; }
+  .Header > .container div#buttonsLog {
+    margin-right: 20px; }
+  .overlay div.overlay-content {
+    margin-top: 10%; }
+    .overlay div.overlay-content a {
+      display: block;
+      font-size: 60px; }
+  div.container > .pre-header-poster {
+    height: 400px; }
+    div.container > .pre-header-poster div#blockOfDragElements .container-item {
+      width: 15%;
+      height: 100%; }
+      div.container > .pre-header-poster div#blockOfDragElements .container-item #middleBlockOfPoster {
+        margin-top: 50px; }
+        div.container > .pre-header-poster div#blockOfDragElements .container-item #middleBlockOfPoster p {
+          font-size: 16px;
+          margin-top: -30px; }
+    div.container > .pre-header-poster div#blockOfDragElements div#countElements {
+      margin-top: 100px; } }
+
+@media screen and (max-width: 300px) {
+  div.container > .pre-header-poster div#blockOfDragElements div#countElements {
+    margin-top: 30px; } }
+
+/*# sourceMappingURL=mediaStyle.css.map */
