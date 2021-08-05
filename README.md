@@ -10,6 +10,13 @@ You can see layout:
 ## For developers
   
   - You can download media to **/public/media** from [media](https://drive.google.com/drive/folders/1g3iiD5dKXAnEr3l45I2bOGeo2CoFC5N0?usp=sharing) or use your.
+```
+It will be look like this:
+
+      / favicons
+media - images
+      \ poster
+```
 ## Tech
   Dillinger uses a number of open source projects to work properly:
   - Fast node.js network app framework [Express](http://expressjs.com/en/guide/routing.html)
