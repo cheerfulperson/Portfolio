@@ -1,4 +1,4 @@
-<header class="Header flex-wrap flex-align-center sticky">
+<header class="Header flex-wrap flex-align-center sticky" check="off">
     <div class="container com-padding flex-wrap flex-align-center position-relative">
         <a id="logo" class="vertical-middle " href="/">
             <img src="https://cdn.logo.com/hotlink-ok/enterprise/eid_422203f0-477b-492b-9847-689feab1452a/logo-dark-2020.png"
@@ -40,26 +40,41 @@
 
     function changeHeader() {
         header.style.transition = 'background 0.5s linear';
-        if (window.scrollY > 10) {
-            if (!header.classList.contains('show-color')) header.classList.toggle('show-color')
-        } else header.classList.remove('show-color')
+        if (header.getAttribute('check') == 'off') {
+            if (window.scrollY > 10) {
+                if (!header.classList.contains('show-color')) {
+                    header.classList.add('show-color');
+
+                }
+            } else header.classList.remove('show-color')
+        }
+
 
     }
 
     btnMenu.addEventListener('click', dropNavBar);
-    
-    function addOrRemoveClass(el, className){
-        if(!el) return;
-        if (!el.classList.contains(className))
-            el.classList.toggle(className);
-        else
+
+    function addOrRemoveClass(el, className) {
+        if (!el) return;
+        console.log(className)
+        if (!el.classList.contains(className))          
+            el.classList.add(className);
+         else 
             el.classList.remove(className);
     }
 
     function dropNavBar() {
         // toggle() - если есть подкласс то удалит и наоборот
         header.style.transition = "none";
-        addOrRemoveClass(header, 'show-color');
+
+        if(header.getAttribute('check') == 'off'){
+            header.setAttribute('check', 'on');
+            header.classList.add('show-color');}
+        else {
+            header.setAttribute('check', 'off');
+            header.classList.remove('show-color');
+        }
+        changeHeader();
         
         addOrRemoveClass(navBar, 'overlay');
 
@@ -68,12 +83,12 @@
             let el = btnMenu.children[i];
             if (i === 0) {
                 addOrRemoveClass(el, 'rotate-45');
-            }else if(i === 1){
+            } else if (i === 1) {
                 if (el.style.display != 'none')
                     el.style.display = 'none';
                 else
                     el.style.display = 'flex';
-            }else if(i === 2){
+            } else if (i === 2) {
                 addOrRemoveClass(el, 'rotate-p-45');
             }
         }
