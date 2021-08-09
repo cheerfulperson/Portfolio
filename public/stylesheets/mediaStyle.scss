@@ -222,6 +222,23 @@
         }
       }
     }
+
+    div#customersReview { // * Блок отзывы пользователей
+      height: 720px;
+
+  
+      h2 {
+        margin: 60px 0px 20px 0px;
+      }
+  
+      div#blockOfReviews {
+        margin: 0;
+        height: 500px;
+        div.item {
+          width: 100%;
+        }
+      }
+    }
   }
 
   .animation-bottom-border::after {
@@ -455,7 +472,69 @@
 
       }
     }
+    div#customersReview { // * Блок отзывы пользователей
+      height: 550px;
+
+      h2 {
+        font-size: 32px;
+        line-height: 32px;
+      }
+  
+      div#blockOfReviews {
+        margin: 0;
+        height: 300px;
+        div.item {
+          height: 250px;
+          div.snipetBlock{
+            position: absolute;
+            margin: 30px 0px 0 30px;
+            opacity: 0.5;
+            >img{
+              width: 25px;
+              height: 25px;    
+            }
+          }
+          div.item-content{
+            padding-top: 20px;
+            h3{
+              color: black;
+              text-transform: none;
+              text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            p{
+              font-size: 16px;
+              line-height: 16px;
+            }
+            img.customer-avatar{
+              border-radius: 100%;
+              width: 50px;
+              height: 50px;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+    }
+    
   }
+  div.inBlock { // ? -----------> Блок регестрации и входа
+    height: auto;
+    h2{
+      font-size: 36px;
+    }
+    div.mainInBlock{
+      width: 100%;
+      margin-top: 0;
+      form {
+        padding-right: 20px;
+        padding-left: 20px;
+        div.input-block{
+          width: 100%;
+        }
+      }
+    }
+  }
+  
 }
 
 @media screen and (max-width: 350px) {

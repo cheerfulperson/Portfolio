@@ -13,10 +13,13 @@
             </div>
         </nav>
         <div id="buttonsLog" class="vertical-middle ps-right">
-            <button id="btnLogIn" class="vertical-middle pretty-btn"><a href=""
-                    class="position-relative animation-bottom-border"><span>log in</span></a></button>
-            <button id="btnSignIn" class="position-relative vertical-middle pretty-btn"><a href=""><span>sign
-                        in</span></a></button>
+            <button id="btnLogIn" class="vertical-middle pretty-btn" onclick="openIn('logIn')">
+                <span>log in</span>
+            </button>
+            <button id="btnSignIn" class="position-relative vertical-middle pretty-btn"
+                onclick="openIn('blockHidenReg')">
+                <span>sign up</span>
+            </button>
         </div>
         <div id="blockOfBtnMenu" class="vertical-middle">
             <button id="btnMenu" class="vertical-middle ">
@@ -25,17 +28,59 @@
         </div>
     </div>
 </header>
+<div id="regAndAuthBlock">
+    <div id="logIn" class="hideIn">
+        {{>logIn}}
+    </div>
+    <div id="blockHidenReg" class="hideIn">
+        {{>signUp}}
+    </div>
+    <div id="closeBlockIn">
+        <button onclick="closeBlockIn()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="40" fill="white"
+                class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5zm-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z" />
+            </svg>
+        </button>
+    </div>
+</div>
 <script>
     const header = document.querySelector('header.Header'),
         btnMenu = document.getElementById('btnMenu'),
-        navBar = document.getElementById('navBar');
+        navBar = document.getElementById('navBar'),
+        blockIn = document.getElementById('regAndAuthBlock');
 
-    window.onscroll = changeHeader; // При скролинге
-    window.onresize = (e) => { // При изменении размера окна
-        if (window.innerWidth > 900) {
-            navBar.classList.remove('overlay');
-            header.classList.remove('show-color')
+    function openIn(id) {
+        let elem = document.getElementById(id);
+        if (!blockIn || !elem) return;
+
+        document.body.style.overflow = 'hidden';
+        blockIn.style.height = '100%';
+        for (let el of blockIn.children) {
+            if (el.id != "closeBlockIn")
+                el.style.display = 'none';
+            else
+                el.style.display = 'block';
         }
+
+
+        elem.style.cssText = 'display: block';
+        setTimeout(() => {
+            elem.style.marginTop += 0;
+        }, 100)
+    }
+
+    function closeBlockIn() {
+        if (!blockIn) return;
+
+        setTimeout(() => {
+            for (let el of blockIn.children)
+                el.style.display += 'none';
+        }, 100)
+
+        blockIn.style.height = '0';
+        document.body.style.overflow = 'auto';
     }
 
     function changeHeader() {
@@ -44,22 +89,17 @@
             if (window.scrollY > 10) {
                 if (!header.classList.contains('show-color')) {
                     header.classList.add('show-color');
-
                 }
             } else header.classList.remove('show-color')
         }
-
-
     }
-
-    btnMenu.addEventListener('click', dropNavBar);
 
     function addOrRemoveClass(el, className) {
         if (!el) return;
         console.log(className)
-        if (!el.classList.contains(className))          
+        if (!el.classList.contains(className))
             el.classList.add(className);
-         else 
+        else
             el.classList.remove(className);
     }
 
@@ -67,15 +107,15 @@
         // toggle() - если есть подкласс то удалит и наоборот
         header.style.transition = "none";
 
-        if(header.getAttribute('check') == 'off'){
+        if (header.getAttribute('check') == 'off') {
             header.setAttribute('check', 'on');
-            header.classList.add('show-color');}
-        else {
+            header.classList.add('show-color');
+        } else {
             header.setAttribute('check', 'off');
             header.classList.remove('show-color');
         }
         changeHeader();
-        
+
         addOrRemoveClass(navBar, 'overlay');
 
         // Анимация кнопки меню(превращение в крестик)
@@ -94,4 +134,14 @@
         }
 
     }
+
+    window.onscroll = changeHeader; // При скролинге
+    window.onresize = (e) => { // При изменении размера окна
+        if (window.innerWidth > 900) {
+            navBar.classList.remove('overlay');
+            header.classList.remove('show-color')
+        }
+    }
+
+    btnMenu.addEventListener('click', dropNavBar);
 </script>

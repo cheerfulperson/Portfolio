@@ -2,7 +2,7 @@
     <div id="multimedia" class="container multi-media">
         <div class="multi-media-content" step="0">
             <video class="videoPoster" autoplay loop muted>
-                <source src="/media/poster/Intro - 81605.mp4" type="video/mp4">
+                <source src="/media/poster/Astronaut - 73819.mp4" type="video/mp4">
             </video>
         </div>
         <div class="multi-media-content vs-none" step="1">
@@ -29,8 +29,8 @@
                 <h2 class="text-shadow">BUILD YOUR FUTURE WITH US</h2>
                 <p class="text-shadow">Whatever the approach to development may be, the final
                     program must satisfy somefundamental properties</p>
-                <button class="base-btn-1" style="text-transform: uppercase;"><span style="font;">get
-                        started</span></button>
+                <button class="base-btn-1" style="text-transform: uppercase;"><a href="#joinUS"><span style="font;">get
+                        started</span></a></button>
             </div>
             <div id="countElements"></div>
         </div>
@@ -45,7 +45,7 @@
         </div>
     </div>
 </div>
-<main class="main-block container" style="background: sandybrown;">
+<main class="main-block container">
     <div id="navigationBlock" class="container flex flex-align-center">
         <a href="#consult" class="navi-item flex flex-column flex-align-center">
             <img src="/media/favicons/d8814d2b0be83da972864a35f724974b.png" alt="">
@@ -270,34 +270,42 @@
             </div>
         </div>
     </div>
-    <div id="customersReview" class="container">
+    <div id="customersReview" class="container position-relative">
+        {{!-- <div style="position:absolute; width: 2px; height:100%; margin:auto; background:green;"></div> --}}
         <h2>CUSTOMERS REVIEW</h2>
         <div id="blockOfReviews" class="container">
-            <div class="item" ></div>
-            <div class="item" ></div>
-            <div class="item" ></div>
-            <div class="item" ></div>
-            <div class="item" ></div>
-            <div class="item" ></div>
+            {{#each reviews}}
+            <div class="item {{#if this.classListAddShow}}show{{/if}}">
+                <div class="snipetBlock">
+                    <img src="/media/favicons/e08b8624d4cb9ff7488c6d1b0848de1f.png" alt="">
+                </div>
+                <div class="item-content">
+                    <img class="customer-avatar" src="/media/favicons/c1dwq3radf9.png" alt="">
+                    <p>Though similar to a traditional laptop in appearance and size, the KidKomputer V16 is designed to
+                        provide the pre-teen crowd with their first computing experience.</p>
+                    <h3>Egor Bo</h3>
+                </div>
+            </div>
+            {{/each}}
         </div>
         <div id="arrowsBlock">
-            <button id="leftBtn">
+            <button id="leftBtn" onclick="scrollReviews(-1)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-arrow-left" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
                         d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
                 </svg>
             </button>
-            <button id="rightBtn">
+            <button id="rightBtn" onclick="scrollReviews(1)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-arrow-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
                         d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
                 </svg>
             </button>
-        </div>      
+        </div>
     </div>
-    <div id="signInBlock" class="container flex flex-column">
-            <h2>sign in</h2>
+    <div id="joinUS">
+        {{>signUp}}
     </div>
 </main>

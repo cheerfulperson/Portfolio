@@ -1,3 +1,7 @@
+let $ = (el = "body") => { // Сокращенная форма получения элемента
+    return document.querySelector(el);
+}
+
 const
     videosPoster = document.querySelectorAll('.videoPoster'),
     multimedia = document.getElementById('multimedia'),
@@ -5,14 +9,41 @@ const
     poster = document.querySelector('.pre-header-poster'),
     lernMoreBlock = $('#lernMoreBlockDesign'),
     textBlockDesign = $('#textBlockDesign'),
-    enginersPhotos = $('div#blockOfEngineersPhoto');
+    enginersPhotos = $('div#blockOfEngineersPhoto'),
+    reviesBlock = $('#blockOfReviews');
 
-let setTimeToNextSlide,
+let setTimeToNextSlide, timeOut, intervalOut,
     step = 0,
     photoNumber = 0,
     imageNum = 1;
 
-function createLinePreloader(step) {
+
+function getNumFromStyle(el, style) { // Получение у элемента из стиля числа
+    return Number().getNumber(getComputedStyle(el)[style]);
+}
+
+Number.prototype.getNumber = function (num = 0) { // * Получение из строки числа
+    return typeof num == 'string' ?
+        Number(num.split("").map(el => {
+            if (el == '.' || !isNaN(Number(el)))
+                return el == '.' ? '.' : Number(el)
+        }).join("")) :
+        num;
+}
+
+async function changeCssText(arrayOfElements = [], arrayForWait = [], time = 300) { // Функция меняет сss через время и сразу
+    arrayOfElements.forEach(e => {
+        e.el.style.cssText += e.cssText
+    })
+    await new Promise(resolve => setTimeout(resolve, time));
+    await arrayForWait.forEach(e => {
+        e.el.style.cssText += e.cssText
+    })
+}
+
+function createLinePreloader(step) { // Создет линии на постере какие элементы
+    if(!posterCounter)return;
+
     posterCounter.innerHTML = "";
     for (let i = 0; i < multimedia.children.length; i++) {
         if (posterCounter.children.length != multimedia.children.length)
@@ -20,13 +51,14 @@ function createLinePreloader(step) {
     }
 }
 
-function getPreOrNextImage(num, isPressed) {
+function getPreOrNextImage(num, isPressed) { // получаем следующий или предыдущий постер
     step += num;
 
     let posterElements = multimedia.children,
         timer = 5000,
         videoEl;
 
+    // Устанавливаем пределы
     if (step < 0) step = posterElements.length - 1;
     else if (step >= posterElements.length) step = 0;
 
@@ -83,17 +115,7 @@ function resizeVideo(el) { // Масштабирование видео
 }
 
 
-async function changeCssText(arrayOfElements = [], arrayForWait = [], time = 300) {
-    arrayOfElements.forEach(e => {
-        e.el.style.cssText += e.cssText
-    })
-    await new Promise(resolve => setTimeout(resolve, time));
-    await arrayForWait.forEach(e => {
-        e.el.style.cssText += e.cssText
-    })
-}
-
-function getLearnMoreBlock(isOpen = false) {
+function getLearnMoreBlock(isOpen = false) { // Получение блока с текстом lern more
     if (isOpen) {
         changeCssText([{
             el: $('#lernMoreBlockDesign'),
@@ -128,11 +150,9 @@ function getMarginLeft(el, isMinus = true) {
     el.style.cssText = `margin-left: ${isMinus ? '-':'+'}${photoWidth - marginLeft / 2}px;`
 }
 
-function setAnimation() {
-
-}
-
 function getNewMiddleImage(num) {
+    if(!enginersPhotos) return;
+
     let
         counter = $('p#engineersImagesCounter'),
         imagesAmount = enginersPhotos.children.length,
@@ -207,7 +227,7 @@ function getNewMiddleImage(num) {
                 iterations: 1
             });
         } else if (num == 1) {
-            console.log(getComputedStyle(next).marginLeft)
+
             previous.animate([
                 // keyframes
                 {
@@ -227,42 +247,79 @@ function getNewMiddleImage(num) {
 
 }
 
-function $(el = "body") {
-    return document.querySelector(el)
-}
-
-Number.prototype.getNumber = function (num = 0) { // * Получение из строки числа
-    return typeof num == 'string' ?
-        Number(num.split("").map(el => {
-            if (el == '.' || !isNaN(Number(el)))
-                return el == '.' ? '.' : Number(el)
-        }).join("")) :
-        num;
-}
-
 function resize() { // Отвечает за оптимизацию стилей при загрузке и изменении страницы
     videosPoster.forEach(el => resizeVideo(el));
     getNewMiddleImage(0);
-
+    if(reviesBlock){
+        changeCssText([{
+            el: reviesBlock.children[0],
+            cssText: `margin-left:${getNumFromStyle(reviesBlock, 'width') / 2 - getNumFromStyle(reviesBlock.children[0], 'width') / 2}px;`
+        }, {
+            el: reviesBlock.children[reviesBlock.children.length - 1],
+            cssText: `margin-right:${getNumFromStyle(reviesBlock, 'width') / 2 - getNumFromStyle(reviesBlock.children[0], 'width') / 2}px;`
+        }])
+    }
 }
 
 window.onresize = resize;
 window.onload = () => {
+
     for (let el of videosPoster) {
         el.addEventListener('loadeddata', resize)
     }
+    resize()
 };
+
+function scrollReviews(number = 0){
+    if (timeOut)
+        clearTimeout(timeOut);
+
+    let children = reviesBlock.children,
+        e = reviesBlock;
+    for (let element of children) {
+        if (element.classList.contains('show'))
+            element.classList.remove('show');
+    }
+    let scrollSize = (e.scrollWidth - getNumFromStyle(reviesBlock, 'width')) / (children.length - 1);
+
+    let num = Math.round(e.scrollLeft / scrollSize) + number;
+    if(num > children.length - 1) num = children.length - 1;
+    else if(num < 0) num = 0;
+
+    console.log(num)
+    let el = children[num];
+    el.classList.add('show')
+
+    timeOut = setTimeout(() => {
+        intervalOut = setInterval(() => {
+            if (Math.round(e.scrollLeft) > Math.round(num * scrollSize) + 10)
+                e.scrollLeft -= 10;
+            else if (Math.round(e.scrollLeft) < Math.round(num * scrollSize) - 10)
+                e.scrollLeft += 10;
+            else {
+                clearInterval(intervalOut)
+                e.scrollLeft = scrollSize * num;
+            }
+        }, 10);
+    }, 300);
+}
+if(reviesBlock)
+    reviesBlock.addEventListener('scroll', ()=>{scrollReviews()})
 
 if ($('video'))
     $('video').addEventListener('loadedmetadata', () => {
         getPreOrNextImage(0)
     })
-$('#preData').addEventListener('click', () => {
-    getPreOrNextImage(-1, true)
-})
-$('#postData').addEventListener('click', () => {
-    getPreOrNextImage(1, true)
-})
+
+if($('#preData'))    
+    $('#preData').addEventListener('click', () => {
+        getPreOrNextImage(-1, true)
+    })
+
+if($('#postData'))
+    $('#postData').addEventListener('click', () => {
+        getPreOrNextImage(1, true)
+    })
 
 createLinePreloader(step);
 getNewMiddleImage(0);

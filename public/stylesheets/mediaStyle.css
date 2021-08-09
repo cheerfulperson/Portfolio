@@ -134,6 +134,15 @@
             transition: opacity 0.5s; }
           main.main-block div#engineer :nth-child(2) div#enginersPhotos div#blockOfEngineersPhoto .middle {
             margin: 0 50px 0 50px; }
+  main.main-block div#customersReview {
+    height: 720px; }
+    main.main-block div#customersReview h2 {
+      margin: 60px 0px 20px 0px; }
+    main.main-block div#customersReview div#blockOfReviews {
+      margin: 0;
+      height: 500px; }
+      main.main-block div#customersReview div#blockOfReviews div.item {
+        width: 100%; }
   .animation-bottom-border::after {
     display: none; }
   .rotate-45 {
@@ -268,7 +277,50 @@
       main.main-block div#operate div#agileBlock div.container-item img {
         margin-top: 20px;
         width: 75px;
-        height: 75px; } }
+        height: 75px; }
+  main.main-block div#customersReview {
+    height: 550px; }
+    main.main-block div#customersReview h2 {
+      font-size: 32px;
+      line-height: 32px; }
+    main.main-block div#customersReview div#blockOfReviews {
+      margin: 0;
+      height: 300px; }
+      main.main-block div#customersReview div#blockOfReviews div.item {
+        height: 250px; }
+        main.main-block div#customersReview div#blockOfReviews div.item div.snipetBlock {
+          position: absolute;
+          margin: 30px 0px 0 30px;
+          opacity: 0.5; }
+          main.main-block div#customersReview div#blockOfReviews div.item div.snipetBlock > img {
+            width: 25px;
+            height: 25px; }
+        main.main-block div#customersReview div#blockOfReviews div.item div.item-content {
+          padding-top: 20px; }
+          main.main-block div#customersReview div#blockOfReviews div.item div.item-content h3 {
+            color: black;
+            text-transform: none;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); }
+          main.main-block div#customersReview div#blockOfReviews div.item div.item-content p {
+            font-size: 16px;
+            line-height: 16px; }
+          main.main-block div#customersReview div#blockOfReviews div.item div.item-content img.customer-avatar {
+            border-radius: 100%;
+            width: 50px;
+            height: 50px;
+            object-fit: cover; }
+  div.inBlock {
+    height: auto; }
+    div.inBlock h2 {
+      font-size: 36px; }
+    div.inBlock div.mainInBlock {
+      width: 100%;
+      margin-top: 0; }
+      div.inBlock div.mainInBlock form {
+        padding-right: 20px;
+        padding-left: 20px; }
+        div.inBlock div.mainInBlock form div.input-block {
+          width: 100%; } }
 
 @media screen and (max-width: 350px) {
   div.container > .pre-header-poster div#blockOfDragElements div#countElements {

@@ -1,0 +1,61 @@
+<footer class="Footer">
+    <div id="preFooter" class="container">
+        <ul id="links">
+            <li>
+                <h3>Leran more</h3>
+                <a href=""><span>Pricing & plans</span></a>
+                <a href=""><span>Projects</span></a>
+                <a href=""><span>FAQ</span></a>
+            </li>
+            <li>
+                <h3>Support</h3>
+                <a href=""><span>Terms of Servise</span></a>
+                <a href=""><span>Privacy Policy</span></a>
+            </li>
+            <li>
+                <h3>Get in touch</h3>
+                <a href=""><span>Contact us</span></a>
+            </li>
+        </ul>
+        <ul id="social">
+            <li>
+                <button class="base-btn-2">
+                    <a href="https://github.com/cheerfulperson/Portfolio/tree/main">
+                        <img src="/media/favicons/ed997356102ce2456239e0802c96b595.png" alt="">
+                    </a>
+                </button>
+            </li>
+            <li>
+                <button class="base-btn-2">
+                    <a href="">
+                        <img src="/media/favicons/f475f60534af3cfe0175d061f151a2bf.png" alt="">
+                    </a>
+                </button>
+            </li>
+            <li>
+                <button class="base-btn-2">
+                    <a href="https://twitter.com/Egorka03901101">
+                        <img src="/media/favicons/da71211b127a313eb67af590685b27f2.png" alt="">
+                    </a>             
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div id="postFooter" class="container">
+        <p>© by yammyCode <span id="year"></span>. All right reserved.</p>
+    </div>
+</footer>
+<script>
+    const 
+        footer = document.querySelector('footer'),
+        main = document.getElementById('main');
+
+    document.getElementById('year').innerHTML = new Date().getFullYear();
+    window.addEventListener('load', (e) => {
+        let top = window.innerHeight - parseInt(parseInt(getComputedStyle(main).height)) - 21.44 - parseInt(getComputedStyle(footer).height);
+        if(parseInt(getComputedStyle(main).height) < window.innerHeight){
+            footer.style.cssText = ` margin-top: ${top}px;`;
+        }
+        
+    })
+</script>
