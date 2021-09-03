@@ -1,0 +1,299 @@
+<div class="pre-header-poster position-relative">
+    <div id="multimedia" class="container multi-media">     
+        {{#each posterMedia}}
+            {{#if (isVideo this.type)}}
+                <div class="multi-media-content" step="{{this.step}}">
+                    <video class="videoPoster" autoplay loop muted>
+                        <source src="{{this.filePath}}" type="video/mp4">
+                    </video>
+                </div>
+            {{else}}    
+                <div class="multi-media-content flex flex-align-center vs-none" step="{{this.step}}">
+                    <img class="imagePoster " src="{{this.filePath}}" alt="">
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+    <div class="container position-absolute flex-wrap flex-align-center" id="blockOfDragElements">
+        <div class="container-item flex-row-center">
+            <button id="preData" class="beauty-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" class="bi bi-caret-left"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z" />
+                </svg>
+            </button>
+        </div>
+        <div id="middleDataBlock" class="container-item flex-row-center">
+            <div id="middleBlockOfPoster" class="flex-wrap flex-align-center">
+                <h2 class="text-shadow">BUILD YOUR FUTURE WITH US</h2>
+                <p class="text-shadow">Whatever the approach to development may be, the final
+                    program must satisfy somefundamental properties</p>
+                <button class="base-btn-1" style="text-transform: uppercase;"><a href="#joinUS"><span style="font;">get
+                        started</span></a></button>
+            </div>
+            <div id="countElements"></div>
+        </div>
+        <div class="container-item flex-row-center">
+            <button id="postData" class="beauty-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" class="bi bi-caret-right"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+<main class="main-block container">
+    <div id="navigationBlock" class="container flex flex-align-center">
+        <a href="#consult" class="navi-item flex flex-column flex-align-center">
+            <img src="/media/favicons/d8814d2b0be83da972864a35f724974b.png" alt="">
+            <span class="navi-text">CONSULT</span>
+        </a>
+        <a href="#design" class="navi-item flex flex-column flex-align-center">
+            <img src="media/favicons/e2516e89440acd248d1edbfb71deb494.png" alt="">
+            <span class="navi-text">DESIGN</span>
+        </a>
+        <a href="#engineer" class="navi-item flex flex-column flex-align-center">
+            <img src="media/favicons/00296891e4de2aaf9342b356e906b877.png" alt="">
+            <span class="navi-text">ENGINEER</span>
+        </a>
+        <a href="#operate" class="navi-item flex flex-column flex-align-center">
+            <img src="media/favicons/0577e50c3042c9a9916454f3d2ba0676.png" alt="">
+            <span class="navi-text">OPERATE</span>
+        </a>
+        <a href="#operate" class="navi-item flex flex-column flex-align-center">
+            <img src="media/favicons/a4d7eef2c954774f3407518c22457594.png" alt="">
+            <span class="navi-text">OPTIMIZE</span>
+        </a>
+    </div>
+    <div id="consult" class="container flex flex-align-center flex-column">
+        <h2>RAPPRESENT <span>YOUR</span> IDEA WITH US</h2>
+        <div id="consultInfoBlock" class="flex flex-align-center">
+            <div class="flex-item flex-column">
+                <img src="/media/favicons/c1dwq3radf9.png" alt="">
+                <h3>Technology Consulting</h3>
+                <p>Let us help you decide what
+                    technology makes the most
+                    sense for your unique project.
+                    You can save tons of money by
+                    making the right decision here.
+                </p>
+            </div>
+            <div class="flex-item flex-column">
+                <img src="/media/favicons/c2fafafd3fgs4.png" alt="">
+                <h3>Website Design Consulting</h3>
+                <p>Don’t stand behind your competitors.
+                    We will analyze the current state of
+                    your website and help you to find the areas
+                    for improvement.
+                </p>
+            </div>
+            <div class="flex-item flex-column">
+                <img src="/media/favicons/c3dggergrg421.png" alt="">
+                <h3>Business Strategy Consulting</h3>
+                <p>We can help you to answer some
+                    crucial questions regarding
+                    the business strategy, target user
+                    audience and key features that should
+                    be included in your product.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="design" class="container position-relative flex-wrap flex-align-center">
+        <div id="lernMoreBlockDesign" class="container">
+            <button id="btnLearnMoreDesign" class="base-btn-1" onclick="getLearnMoreBlock(true)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z" />
+                </svg>
+            </button>
+            <div id="aboutDesign">
+                <h2>THE DESIGN PROCESS CONSISTS OF 6 STEPS:</h2>
+                <ol>
+                    <li>
+                        <span>Define the Problem</span>
+                        <p>You can’t find a solution until you have a clear idea of what the problem is.</p>
+                    </li>
+                    <li>
+                        <span>Collect Information</span>
+                        <p>Collect sketches, take photographs and gather data to start giving you inspiration.</p>
+                    </li>
+                    <li>
+                        <span>Brainstorm and Analyze Ideas</span>
+                        <p>Begin to sketch, make, and study so you can start
+                            to understand how all the data and information you’ve
+                            collected may impact your design.</p>
+                    </li>
+                    <li>
+                        <span> Develop Solutions</span>
+                        <p>Take your preliminary ideas and form multiple small-scale design solutions.</p>
+                    </li>
+                    <li>
+                        <span>Gather Feedback</span>
+                        <p>Present your ideas to as many people as possible:
+                            friends, teachers, professionals, and any others you trust
+                            to give insightful comments.</p>
+                    </li>
+                    <li>
+                        <span>Improve</span>
+                        <p>Reflect on all of your feedback
+                            and decide if or to what extent
+                            it should be incorporated. It is
+                            often helpful to take solutions back
+                            through the Design Process to refine
+                            and clarify them.</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div id="textBlockDesign" class="container-item flex-row-center">
+            <div>
+                <h2>implement <span>your</span> idea with a swart design</h2>
+                <p>
+                    Tasks accompanying and related to programming include:
+                    testing, debugging, source code <b>maintenance,
+                        implementation of build systems</b>, and management
+                    of derived artifacts, such as the machine code of computer programs.
+                </p>
+                <button id="btnLearnMoreDesign" class="base-btn-1" style="text-transform: uppercase;"
+                    onclick="getLearnMoreBlock()">
+                    <span>Learn more</span>
+                </button>
+            </div>
+        </div>
+        <div id="imgBlockDesign" class="container-item flex-row-center">
+            <img src="{{designImg}}" alt="">
+        </div>
+
+    </div>
+    <div id="engineer" class="container flex-wrap">
+        <div class="flex-wrap flex-align-center flex-column">
+            <img src="/media/favicons/a19e8e5e5c2dae9981f3d5187b0ffc19.png" alt="">
+            <h3>OUR DEVELOPERS COMMUNITY</h3>
+            <p>A hacker is any <b>skilled computer expert</b>
+                that uses their technical knowledge
+                to overcome a problem, but it can also mean
+                a security hacker in common language</p>
+        </div>
+        <div class="vertical-middle vertical-middle">
+            <div id="enginersPhotos" class="container">
+                <div id="changerPhotoEngineer" class="container-item flex-wrap flex-row-center">
+                    <button onclick="getNewMiddleImage(-1)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-chevron-left" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                        </svg>
+                    </button>
+                    <p id="engineersImagesCounter">1 / 5</p>
+                    <button onclick="getNewMiddleImage(1)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-chevron-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                        </svg>
+                    </button>
+                </div>
+                <div id="blockOfEngineersPhoto" class="container-item">
+                    {{#each engineersMedia}}
+                        <div class="media">
+                            <img src="{{this}}" alt="img">
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="operate" class="container vertical-middle">
+        <h2>OPERATE</h2>
+        <p>Agile project managment <span>technical & business</span> coaching</p>
+        <div id="agileBlock" class="container flex-wrap flex-row-center">
+            <div class="container-item flex flex-column">
+                <div class="hover-item">
+                    <p>Analysis of concepts and requirements definitions; Determine current state and your expectations.
+                    </p>
+                </div>
+                <div class="list flex-wrap flex-row-center"><span>1</span></div>
+                <p>Definition and
+                    Analysis of Concepts
+                </p>
+                <img src="/media/favicons/a1c945bb25a21f87c3b4c8daaa5aa726_1.png" alt="">
+            </div>
+            <div class="container-item flex flex-column">
+                <div class="hover-item">
+                    <p>Arrange teams and tools needed to optimize production.</p>
+                </div>
+                <div class="list flex-wrap flex-row-center"><span>2</span></div>
+                <p>Planning of Sprints</p>
+                <img src="/media/favicons/e147131fb6f14b879f633d423368a604_2.png" alt="">
+            </div>
+            <div class=" container-item flex flex-column">
+                <div class="hover-item">
+                    <p>From the beginning of the process, the end users involvement and feedback is critical.</p>
+                </div>
+                <div class="list flex-wrap flex-row-center"><span>3</span></div>
+                <p>Collaborative Design Development</p>
+                <img src="/media/favicons/57f20daac24d71bc8442219e88d1ccc7_3.png" alt="">
+            </div>
+            <div class="container-item flex flex-column">
+                <div class="hover-item">
+                    <p>Frequent development delivery through sprints. Feedback on testing & appropriate changes are
+                        imperative.</p>
+                </div>
+                <div class="list flex-wrap flex-row-center"><span>4</span></div>
+                <p>Create and Imolement</p>
+                <img src="/media/favicons/f5d683ed9b059325b0951f6478664b2a_4.png" alt="">
+            </div>
+            <div class="container-item flex flex-column">
+                <div class="hover-item">
+                    <p>Ensure that you are reviewing and monitoring key metrics for success.</p>
+                </div>
+                <div class="list flex-wrap flex-row-center"><span>5</span></div>
+                <p>Review and Monitori</p>
+                <img src="/media/favicons/2ec28b2f4a33fe8e7d898203ac0b22d6_5.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div id="customersReview" class="container position-relative">
+        {{!-- <div style="position:absolute; width: 2px; height:100%; margin:auto; background:green;"></div> --}}
+        <h2>CUSTOMERS REVIEW</h2>
+        <div id="blockOfReviews" class="container">
+            {{#each reviews}}
+            <div class="item {{#if this.classListAddShow}}show{{/if}}">
+                <div class="snipetBlock">
+                    <img src="/media/favicons/e08b8624d4cb9ff7488c6d1b0848de1f.png" alt="">
+                </div>
+                <div class="item-content">
+                    <img class="customer-avatar" src="/media/favicons/c1dwq3radf9.png" alt="">
+                    <p>Though similar to a traditional laptop in appearance and size, the KidKomputer V16 is designed to
+                        provide the pre-teen crowd with their first computing experience.</p>
+                    <h3>Egor Bo</h3>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        <div id="arrowsBlock">
+            <button id="leftBtn" onclick="scrollReviews(-1)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                </svg>
+            </button>
+            <button id="rightBtn" onclick="scrollReviews(1)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div id="joinUS">
+        {{>signUp}}
+    </div>
+</main>
