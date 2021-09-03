@@ -2,14 +2,22 @@
     <h2>Log In</h2>
     <p>Nice to meet you</p>
     <div id="mainlogInBlock" class="mainInBlock">
+        <div class="alert vs-none">
+            <span class="closebtn" onclick="closeParentNode(this.parentElement);">×</span>
+            <span class="text"></span>
+        </div>
         <form action="" method="post">
             <div class="input-block">                  
-                <input type="text" name="email" autocomplete="off" required>
-                <label class="control-label" for="email"><b>Email</b></label>
+                <input class="beauty-input-1" type="text" name="email" autocomplete="off" required>
+                <label class="beauty-label-1 control-label" for="email"><b>Email</b></label>
             </div>
             <div class="input-block">                 
-                <input type="password" name="psw" autocomplete="off" required>
-                <label class="control-label" for="psw"><b>Password</b></label>
+                <input class="beauty-input-1" type="password" name="psw" autocomplete="off" required>
+                <label class="beauty-label-1 control-label" for="psw"><b>Password</b></label>
+            </div>
+            <div class="input-block" style="padding-top: 20px;">                 
+                <input class="check-box" type="checkbox" name="remember">
+                <label class="control-label text-checkbox" for="remember">Remember me for a long time</label>
             </div>
             <div id="logInformButtons" class="form-buttons">
                 <button class="base-btn-1"><span>Log In</span></button>

@@ -1,34 +1,80 @@
 <header class="Header flex-wrap flex-align-center sticky" check="off">
-    <div class="container com-padding flex-wrap flex-align-center position-relative">
+    <div id="headerContainer" class="container com-padding flex-wrap flex-align-center position-relative">
         <a id="logo" class="vertical-middle " href="/">
             <img src="https://cdn.logo.com/hotlink-ok/enterprise/eid_422203f0-477b-492b-9847-689feab1452a/logo-dark-2020.png"
                 alt="logo">
         </a>
+        {{setParams}}
         <nav id="navBar" class="vertical-middle">
             <div class="overlay-content">
                 <a href="/" class="nav-element position-relative animation-bottom-border"><span>Home</span></a>
-                <a href="" class="nav-element position-relative animation-bottom-border"><span>Pricing</span></a>
-                <a href="" class="nav-element position-relative animation-bottom-border"><span>Team</span></a>
-                <a href="" class="nav-element position-relative animation-bottom-border"><span>Contact</span></a>
+                <a href="/pricing"
+                    class="nav-element position-relative animation-bottom-border"><span>Pricing</span></a>
+                <a href="/contacts" class="nav-element position-relative animation-bottom-border"><span>Contact
+                        Us</span></a>
             </div>
         </nav>
-        <div id="buttonsLog" class="vertical-middle ps-right">
-            <button id="btnLogIn" class="vertical-middle pretty-btn" onclick="openIn('logIn')">
-                <span>log in</span>
-            </button>
-            <button id="btnSignIn" class="position-relative vertical-middle pretty-btn"
-                onclick="openIn('blockHidenReg')">
-                <span>sign up</span>
-            </button>
+        <div id="personBlock" class="ps-right">
+            {{#if isThereASession}}
+            <div id="avatarsBlock" class="vertical-middle">
+                <img id="userImage" width="40px" height="40px" src="{{userData.image}}" alt="">
+            </div>
+            <div id="avatarsChoice">
+                {{#each avatars}}
+                <img src="{{this}}" width="40px" height="40px" alt="">
+                {{/each}}
+            </div>
+            {{else}}
+            <div id="buttonsLog" class="vertical-middle">
+                <button id="btnLogIn" class="vertical-middle pretty-btn" onclick="openIn('logIn')">
+                    <span>log in</span>
+                </button>
+                <button id="btnSignIn" class="position-relative vertical-middle pretty-btn"
+                    onclick="openIn('blockHidenReg')">
+                    <span>sign up</span>
+                </button>
+            </div>
+            {{/if}}
         </div>
-        <div id="blockOfBtnMenu" class="vertical-middle">
-            <button id="btnMenu" class="vertical-middle ">
+        <div id="blockOfBtnMenu" class="vertical-middle" {{#if isThereASession}} style="display: block;
+                    margin-right: 10px;" {{/if}}>
+            <button id="btnMenu" class="vertical-middle">
                 <span></span><span></span><span></span>
             </button>
         </div>
     </div>
 </header>
-<div id="regAndAuthBlock">
+<div id="wrapBlockMenu" class="container">
+    <div id="wrapMenu" class="category-wrap vs-none">
+        <div class="menuHeader">
+            <button id="closeMenuBtn" class="ase-btn-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black"
+                    class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+                </svg>
+            </button>
+            {{#if isThereASession}}
+            <h3>{{userData.name}}</h3>
+            {{/if}}
+        </div>
+        <ul>
+            <li><a href="/"><span>home</span></a></li>
+            <li><a href="/pricing"><span>pricing</span></a></li>
+            <li><a href="/contacts"><span>contact Us</span></a></li>
+            {{#if isThereASession}}
+            <li><a href=""><span>chat</span></a></li>
+            <li><a href="/feedback"><span>leave feedback</span></a></li>
+            <li>
+                <form action="/users/logout" method="get"><button><span>log out</span></button></form>
+            </li>
+            {{/if}}
+        </ul>
+    </div>
+</div>
+{{#if isThereASession}}
+{{else}}
+<div id="regAndAuthBlock" style="top: 0 !important;">
     <div id="logIn" class="hideIn">
         {{>logIn}}
     </div>
@@ -37,111 +83,12 @@
     </div>
     <div id="closeBlockIn">
         <button onclick="closeBlockIn()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="40" fill="white"
-                class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="40" fill="white" class="bi bi-arrow-bar-up"
+                viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
                     d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5zm-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z" />
             </svg>
         </button>
     </div>
 </div>
-<script>
-    const header = document.querySelector('header.Header'),
-        btnMenu = document.getElementById('btnMenu'),
-        navBar = document.getElementById('navBar'),
-        blockIn = document.getElementById('regAndAuthBlock');
-
-    function openIn(id) {
-        let elem = document.getElementById(id);
-        if (!blockIn || !elem) return;
-
-        document.body.style.overflow = 'hidden';
-        blockIn.style.height = '100%';
-        for (let el of blockIn.children) {
-            if (el.id != "closeBlockIn")
-                el.style.display = 'none';
-            else
-                el.style.display = 'block';
-        }
-
-
-        elem.style.cssText = 'display: block';
-        setTimeout(() => {
-            elem.style.marginTop += 0;
-        }, 100)
-    }
-
-    function closeBlockIn() {
-        if (!blockIn) return;
-
-        setTimeout(() => {
-            for (let el of blockIn.children)
-                el.style.display += 'none';
-        }, 100)
-
-        blockIn.style.height = '0';
-        document.body.style.overflow = 'auto';
-    }
-
-    function changeHeader() {
-        header.style.transition = 'background 0.5s linear';
-        if (header.getAttribute('check') == 'off') {
-            if (window.scrollY > 10) {
-                if (!header.classList.contains('show-color')) {
-                    header.classList.add('show-color');
-                }
-            } else header.classList.remove('show-color')
-        }
-    }
-
-    function addOrRemoveClass(el, className) {
-        if (!el) return;
-        console.log(className)
-        if (!el.classList.contains(className))
-            el.classList.add(className);
-        else
-            el.classList.remove(className);
-    }
-
-    function dropNavBar() {
-        // toggle() - если есть подкласс то удалит и наоборот
-        header.style.transition = "none";
-
-        if (header.getAttribute('check') == 'off') {
-            header.setAttribute('check', 'on');
-            header.classList.add('show-color');
-        } else {
-            header.setAttribute('check', 'off');
-            header.classList.remove('show-color');
-        }
-        changeHeader();
-
-        addOrRemoveClass(navBar, 'overlay');
-
-        // Анимация кнопки меню(превращение в крестик)
-        for (let i = 0; i < btnMenu.children.length; i++) {
-            let el = btnMenu.children[i];
-            if (i === 0) {
-                addOrRemoveClass(el, 'rotate-45');
-            } else if (i === 1) {
-                if (el.style.display != 'none')
-                    el.style.display = 'none';
-                else
-                    el.style.display = 'flex';
-            } else if (i === 2) {
-                addOrRemoveClass(el, 'rotate-p-45');
-            }
-        }
-
-    }
-
-    window.onscroll = changeHeader; // При скролинге
-    window.onresize = (e) => { // При изменении размера окна
-        if (window.innerWidth > 900) {
-            navBar.classList.remove('overlay');
-            header.classList.remove('show-color')
-        }
-    }
-
-    btnMenu.addEventListener('click', dropNavBar);
-</script>
+{{/if}}

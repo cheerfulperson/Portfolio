@@ -1,18 +1,18 @@
 <div class="pre-header-poster position-relative">
-    <div id="multimedia" class="container multi-media">
-        <div class="multi-media-content" step="0">
-            <video class="videoPoster" autoplay loop muted>
-                <source src="/media/poster/Astronaut - 73819.mp4" type="video/mp4">
-            </video>
-        </div>
-        <div class="multi-media-content vs-none" step="1">
-            <video class="videoPoster" autoplay loop muted>
-                <source src="/media/poster/Youtube Intro - 79585.mp4" type="video/mp4">
-            </video>
-        </div>
-        <div class="multi-media-content flex flex-align-center vs-none" step="2">
-            <img class="imagePoster " src="/media/poster/success-2081168_1280.jpg" alt="">
-        </div>
+    <div id="multimedia" class="container multi-media">     
+        {{#each posterMedia}}
+            {{#if (isVideo this.type)}}
+                <div class="multi-media-content" step="{{this.step}}">
+                    <video class="videoPoster" autoplay loop muted>
+                        <source src="{{this.filePath}}" type="video/mp4">
+                    </video>
+                </div>
+            {{else}}    
+                <div class="multi-media-content flex flex-align-center vs-none" step="{{this.step}}">
+                    <img class="imagePoster " src="{{this.filePath}}" alt="">
+                </div>
+            {{/if}}
+        {{/each}}
     </div>
     <div class="container position-absolute flex-wrap flex-align-center" id="blockOfDragElements">
         <div class="container-item flex-row-center">
@@ -166,7 +166,7 @@
             </div>
         </div>
         <div id="imgBlockDesign" class="container-item flex-row-center">
-            <img src="/media/images/brick-wall-1850095_1920.jpg" alt="">
+            <img src="{{designImg}}" alt="">
         </div>
 
     </div>
@@ -199,23 +199,11 @@
                     </button>
                 </div>
                 <div id="blockOfEngineersPhoto" class="container-item">
-
-                    <div class="media middle  ">
-                        <img src="/media/images/brick-wall-1850095_1920.jpg" alt="">
-                    </div>
-                    <div class="media  ">
-                        <img src="/media/images/code-5113374_1920.jpg" alt="">
-                    </div>
-                    <div class="media  ">
-                        <img src="/media/images/code-5113374_1920.jpg" alt="">
-                    </div>
-
-                    <div class="media opacity  ">
-                        <img src="/media/poster/success-2081168_1280.jpg" alt="">
-                    </div>
-                    <div class="media opacity  ">
-                        <img src="/media/poster/success-2081168_1280.jpg" alt="">
-                    </div>
+                    {{#each engineersMedia}}
+                        <div class="media">
+                            <img src="{{this}}" alt="img">
+                        </div>
+                    {{/each}}
                 </div>
             </div>
         </div>

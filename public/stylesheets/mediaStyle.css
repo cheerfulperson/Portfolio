@@ -320,7 +320,21 @@
         padding-right: 20px;
         padding-left: 20px; }
         div.inBlock div.mainInBlock form div.input-block {
-          width: 100%; } }
+          width: 100%; }
+        div.inBlock div.mainInBlock form .text-checkbox {
+          font-size: 16px;
+          line-height: 16px; }
+  .mainInBlock {
+    width: 100%;
+    margin-top: 0; }
+    .mainInBlock form {
+      padding-right: 20px;
+      padding-left: 20px; }
+      .mainInBlock form div.input-block {
+        width: 100%; }
+      .mainInBlock form .text-checkbox {
+        font-size: 16px;
+        line-height: 16px; } }
 
 @media screen and (max-width: 350px) {
   div.container > .pre-header-poster div#blockOfDragElements div#countElements {

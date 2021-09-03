@@ -3,8 +3,8 @@
         <ul id="links">
             <li>
                 <h3>Leran more</h3>
-                <a href=""><span>Pricing & plans</span></a>
-                <a href=""><span>Projects</span></a>
+                <a href="/pricing"><span>Pricing & plans</span></a>
+                <a href="https://github.com/cheerfulperson"><span>Projects</span></a>
                 <a href=""><span>FAQ</span></a>
             </li>
             <li>
@@ -14,7 +14,7 @@
             </li>
             <li>
                 <h3>Get in touch</h3>
-                <a href=""><span>Contact us</span></a>
+                <a href="/contacts"><span>Contact us</span></a>
             </li>
         </ul>
         <ul id="social">
@@ -27,7 +27,7 @@
             </li>
             <li>
                 <button class="base-btn-2">
-                    <a href="">
+                    <a href="https://www.linkedin.com/in/egor-bo-04600621a/">
                         <img src="/media/favicons/f475f60534af3cfe0175d061f151a2bf.png" alt="">
                     </a>
                 </button>
@@ -42,7 +42,7 @@
         </ul>
     </div>
     <div id="postFooter" class="container">
-        <p>© by yammyCode <span id="year"></span>. All right reserved.</p>
+        <p>© by yammyCode <span id="year" style="font-size: ;"></span>. All right reserved.</p>
     </div>
 </footer>
 <script>
@@ -51,11 +51,11 @@
         main = document.getElementById('main');
 
     document.getElementById('year').innerHTML = new Date().getFullYear();
-    window.addEventListener('load', (e) => {
+    /*window.addEventListener('load', (e) => {
         let top = window.innerHeight - parseInt(parseInt(getComputedStyle(main).height)) - 21.44 - parseInt(getComputedStyle(footer).height);
         if(parseInt(getComputedStyle(main).height) < window.innerHeight){
             footer.style.cssText = ` margin-top: ${top}px;`;
         }
         
-    })
+    })*/
 </script>

@@ -1,7 +1,3 @@
-let $ = (el = "body") => { // Сокращенная форма получения элемента
-    return document.querySelector(el);
-}
-
 const
     videosPoster = document.querySelectorAll('.videoPoster'),
     multimedia = document.getElementById('multimedia'),
@@ -17,29 +13,6 @@ let setTimeToNextSlide, timeOut, intervalOut,
     photoNumber = 0,
     imageNum = 1;
 
-
-function getNumFromStyle(el, style) { // Получение у элемента из стиля числа
-    return Number().getNumber(getComputedStyle(el)[style]);
-}
-
-Number.prototype.getNumber = function (num = 0) { // * Получение из строки числа
-    return typeof num == 'string' ?
-        Number(num.split("").map(el => {
-            if (el == '.' || !isNaN(Number(el)))
-                return el == '.' ? '.' : Number(el)
-        }).join("")) :
-        num;
-}
-
-async function changeCssText(arrayOfElements = [], arrayForWait = [], time = 300) { // Функция меняет сss через время и сразу
-    arrayOfElements.forEach(e => {
-        e.el.style.cssText += e.cssText
-    })
-    await new Promise(resolve => setTimeout(resolve, time));
-    await arrayForWait.forEach(e => {
-        e.el.style.cssText += e.cssText
-    })
-}
 
 function createLinePreloader(step) { // Создет линии на постере какие элементы
     if(!posterCounter)return;
