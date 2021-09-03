@@ -280,14 +280,15 @@ class UserController {
       })
   }
 
-
   uploadAvatar(req, res){
     let image = req.body.image;
+    console.log()
     User.updateOne({_id: req.session.user.id}, {image});
-    console.log(req)
-    res.redirect('/');
+    req.session.user.image = image;
+    res.send({state: 200});
   }
-  deleteUserSession(req, res) { // ? Выход из аккаунта
+
+  async deleteUserSession(req, res) { // ? Выход из аккаунта
     if (req.session.user)
       req.session.destroy();
     res.redirect('/');

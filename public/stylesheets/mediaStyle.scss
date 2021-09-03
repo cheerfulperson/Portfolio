@@ -1,0 +1,586 @@
+@media screen and (max-width: 900px) {
+  h2 {
+    font-size: 32px;
+    line-height: 32px;
+  }
+
+  .com-padding {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  // ------> Header
+  .Header>.container {
+    #buttonsLog {
+      margin-right: 50px;
+    }
+
+    div#blockOfBtnMenu {
+      display: block;
+      margin-right: 10px;
+    }
+
+    a#logo>img {
+      width: 40px;
+    }
+
+    nav#navBar {
+      display: none;
+    }
+
+  }
+
+  .overlay {
+    position: fixed;
+    display: block !important;
+    margin-top: 60px;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 31;
+
+    left: -50px;
+    background: rgba(0, 0, 0, 0.8);
+    overflow-x: hidden;
+    transition: 0.5s;
+
+    div.overlay-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+
+      width: 100%;
+
+      a {
+        text-align: left;
+        display: block;
+        font-size: 60px;
+        margin: 30px 0 0 20px !important;
+      }
+
+    }
+  }
+
+  // --------> Poster
+  div.container>.pre-header-poster {
+    height: 500px;
+
+
+
+    div#blockOfDragElements {
+      .container-item {
+
+        #middleBlockOfPoster {
+          margin-top: 140px;
+
+          p {
+            margin-top: -20px;
+          }
+        }
+      }
+
+      div#countElements {
+        margin-top: 100px;
+      }
+    }
+  }
+
+  // -----> main 
+  main.main-block {
+    div#navigationBlock {
+      height: 150px;
+      a.navi-item {
+        img {
+          width: 50px;
+        }
+        span.navi-text {
+          font-size: 20px;
+        }
+      }
+    }
+    div#consult{// Максим твой блок
+      height: auto;
+      div#consultInfoBlock{
+        width: 100%;
+        margin-top: 50px;
+        flex-direction: column;
+        flex-wrap: wrap;
+        div.flex-item{
+          width: 100%;
+          height: 400px;
+        }
+      }
+    }
+    div#design{
+
+      height: 100vh;
+      min-height: 500px;
+      div#textBlockDesign{
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        div{
+          padding: 0 10px 0 10px;
+          text-shadow: 1px 1px 4px #000000;
+          h2{
+            text-align: center;
+
+          }
+          p{
+            display: block;
+            margin: auto;
+            text-align: center;
+            margin-bottom: 20px;
+          }
+          button{
+            display: block;
+            margin: auto;
+            margin-top: 20px;
+          }
+        }
+      }
+      div#imgBlockDesign{
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        img {
+          margin-right: 0;
+          z-index: 0;
+          height: 100%;
+          min-width: 100%;
+          width: auto;
+        }
+      }
+      div#lernMoreBlockDesign{
+        button{
+          margin: 60px 30px 0 0;
+        }
+        div#aboutDesign{
+
+          h2{
+            text-align: center;
+          }      
+          ol li {
+            p{
+              text-align: left;
+            }
+          }
+        }
+      }
+    }
+    div#engineer{ // * Блок для разработчиков
+      height: auto;
+
+      :first-child{
+        width: 100%;
+      }
+      :nth-child(2){
+        width: 100%;
+        padding: 0;
+        div#enginersPhotos{
+          height: 500px;
+          width: 100%;  
+          padding-right: 10px;
+          margin: auto auto;
+          --height-block: 50px;
+          div#changerPhotoEngineer{
+            margin: auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            p{
+              font-size: 32px;
+              width: auto;
+              margin: auto auto;
+            }
+
+          }
+          div#blockOfEngineersPhoto{
+  
+            width: 100%;
+            height: 300px;
+            overflow:hidden;
+            white-space:nowrap;
+            div.media{
+              img{
+                padding:0;
+  
+                width: 100%;
+                height: 100%;
+                position: relative;
+                object-fit: cover;
+              }
+            }
+            .opacity{
+              opacity: 0.2;
+              transition: opacity 0.5s;
+              // margin-left: -80%;
+            }
+            .middle{
+              margin: 0 50px 0 50px;
+            }
+          }
+        }
+      }
+    }
+
+    div#customersReview { // * Блок отзывы пользователей
+      height: 720px;
+
+  
+      h2 {
+        margin: 60px 0px 20px 0px;
+      }
+  
+      div#blockOfReviews {
+        margin: 0;
+        height: 500px;
+        div.item {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .animation-bottom-border::after {
+    display: none;
+  }
+
+  .rotate-45 {
+
+    transform: rotate(-45deg) translate(0px, 7px);
+  }
+
+  .rotate-p-45 {
+
+    transform: rotate(45deg) translate(0px, -7px);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  h2 {
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  .com-padding {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  // -----> Header
+  .Header>.container {
+    a#logo>img {
+      width: 40px;
+    }
+
+    nav {
+      display: none;
+      margin-left: 50px;
+
+    }
+
+    div#buttonsLog {
+      margin-right: 20px;
+    }
+  }
+
+  .overlay {
+    div.overlay-content {
+      margin-top: 10%;
+
+      a {
+        display: block;
+        font-size: 60px;
+      }
+
+    }
+  }
+
+  // --------> Poster
+  div.container>.pre-header-poster {
+    height: 400px;
+
+    div#blockOfDragElements {
+
+
+      .container-item {
+        width: 15%;
+        height: 100%;
+
+        #middleBlockOfPoster {
+          margin-top: 50px;
+
+          p {
+            font-size: 16px;
+            margin-top: -10px;
+          }
+        }
+      }
+
+      div#countElements {
+        margin-top: 100px;
+      }
+    }
+  }
+
+  // -----> Main
+  main.main-block{
+    div#navigationBlock{
+      height: 100px;
+      a.navi-item{
+        img{
+          width: 30px;
+        }
+        span.navi-text{
+          font-size: 14px;
+        }    
+      }
+      a.navi-item:hover{
+        background: var(--main-color-4);
+      }
+    }
+    div#consult{ // Максим твой блок
+      div#consultInfoBlock{ 
+        div.flex-item{
+          h3{
+            padding: 0 5px 0 5px;
+            font-size: 18px;
+          }
+          p{
+            font-size: 14px;
+          }
+        }
+    }
+  }
+    div#design{
+      height: 100vh;
+      div#textBlockDesign{
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        div{
+          padding: 0 10px 0 10px;;
+          h2{
+            text-align: center;
+          }
+          p{
+            text-align: center;
+            max-width: 300px;
+            font-size: 14px;
+            line-height: 14px;
+          }
+          button{
+            display: block;
+            margin: auto;
+          }
+        }
+      }
+      div#imgBlockDesign{
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        img {
+          margin-right: 0;
+          z-index: 0;
+          height: 100%;
+          min-width: 100%;
+          width: auto;
+        }
+      }
+      div#lernMoreBlockDesign{
+        button{
+          margin: 60px 30px 0 0;
+        }
+        div#aboutDesign{
+
+          h2{
+            text-align: center;
+          }      
+          ol li{
+            font-size: 16px;
+            p{
+              font-size: 14px;
+              text-align: left;
+            }
+          }
+        }
+      }
+    }
+    div#operate{
+      padding-bottom: 0;
+      h2{
+        font-size: 32px;
+        margin: 60px 0px 20px 0px;
+      }
+      p{
+        font-size: 18px;
+        line-height: 18px;
+        margin-top: 0;
+        span{
+          color: var(--main-color-2);
+        }
+      }
+      div#agileBlock{
+
+        div.container-item{
+
+          margin: 0;
+          width: 100%;
+          height: 300px;
+          box-shadow: none;
+          border-radius: 0;
+
+          div.hover-item{
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: -300px;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            transition: margin-top 0.3s;
+            p{
+              margin: 0;
+              height: auto;
+            }
+          }
+          
+          div.list{
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 100%;
+            margin-top: 10px;
+            transition: margin-top 0.3s;
+            span{
+              user-select: none;  
+            }
+          }
+          p{
+            margin-top: 40px;
+            width: 200px;
+            height: 50px;
+          }
+          img{
+            margin-top: 20px;
+            width: 75px;
+            height: 75px;
+          }
+  
+        }
+
+      }
+    }
+    div#customersReview { // * Блок отзывы пользователей
+      height: 550px;
+
+      h2 {
+        font-size: 32px;
+        line-height: 32px;
+      }
+  
+      div#blockOfReviews {
+        margin: 0;
+        height: 300px;
+        div.item {
+          height: 250px;
+          div.snipetBlock{
+            position: absolute;
+            margin: 30px 0px 0 30px;
+            opacity: 0.5;
+            >img{
+              width: 25px;
+              height: 25px;    
+            }
+          }
+          div.item-content{
+            padding-top: 20px;
+            h3{
+              color: black;
+              text-transform: none;
+              text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            p{
+              font-size: 16px;
+              line-height: 16px;
+            }
+            img.customer-avatar{
+              border-radius: 100%;
+              width: 50px;
+              height: 50px;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+    }
+    
+  }
+  div.inBlock { // ? -----------> Блок регестрации и входа
+    height: auto;
+    h2{
+      font-size: 36px;
+    }
+    div.mainInBlock{
+      width: 100%;
+      margin-top: 0;
+      form {
+        padding-right: 20px;
+        padding-left: 20px;
+        div.input-block{
+          width: 100%;
+        }
+        .text-checkbox{
+          font-size: 16px;
+          line-height: 16px;
+        }
+      }
+    }
+  }
+  .mainInBlock{
+    width: 100%;
+    margin-top: 0;
+    form {
+      padding-right: 20px;
+      padding-left: 20px;
+      div.input-block{
+        width: 100%;
+      }
+      .text-checkbox{
+        font-size: 16px;
+        line-height: 16px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 350px) {
+
+  // --------> Poster
+  div.container>.pre-header-poster {
+    div#blockOfDragElements {
+      div#countElements {
+        margin-top: 30px;
+      }
+    }
+  }
+    // -----> Main
+    main.main-block{
+      div#navigationBlock{
+        height: 100px;
+        a.navi-item{
+          img{
+            width: 30px;
+          }
+          span.navi-text{
+            font-size: 12px;
+          }    
+        }
+        a.navi-item:hover{
+          background: var(--main-color-4);
+        }
+      }
+    }
+  
+}

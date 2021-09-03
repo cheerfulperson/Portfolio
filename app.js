@@ -58,7 +58,7 @@ app.use(sassMiddleware({
   sourceMap: true
 }));
 app.use(compress());
-app.use(express.static(join(__dirname, 'public')));
+app.use(express.static(join(__dirname, 'public'), {redirect: true}));
 app.use(require('express-session')({
   store: store,
   secret: sessionKey,
