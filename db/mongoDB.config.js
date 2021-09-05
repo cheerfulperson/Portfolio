@@ -11,9 +11,6 @@ const connectToDb = cb => {
     db.on('error', console.error.bind(console, 'connection error:'));
     db.once('open', () => {
         console.log('\x1b[36m%s\x1b[0m', 'Connected to mongoDB!');
-        // db.dropDatabase()
-        // User({name: "Egor", email: "edde@dd.rt", password: "edfwd31"}).save()
-        
         cb();
     });
 };
