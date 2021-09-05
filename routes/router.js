@@ -12,7 +12,7 @@ function getExtension(filename) {
 }
 /* GET home page. */
 router.get('/', function (req, res, next) {
-
+  let isThereASession ;
   let posterMedia = fs.readdirSync(join(__dirname, '../public/media/poster')).map((el, i) => {
     return {
       filePath: `/media/poster/${el}`,
@@ -37,6 +37,7 @@ router.get('/', function (req, res, next) {
     posterMedia: posterMedia,
     engineersMedia: engineersMedia,
     designImg: designPhoto(),
+    isThereASession: req.session.user ? true : false,
     reviews: [{
       classListAddShow: true
     }, 2, 3, 4, 5]

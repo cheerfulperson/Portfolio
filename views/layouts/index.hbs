@@ -1,17 +1,17 @@
 <div class="pre-header-poster position-relative">
-    <div id="multimedia" class="container multi-media">     
+    <div id="multimedia" class="container multi-media">
         {{#each posterMedia}}
-            {{#if (isVideo this.type)}}
-                <div class="multi-media-content" step="{{this.step}}">
-                    <video class="videoPoster" autoplay loop muted>
-                        <source src="{{this.filePath}}" type="video/mp4">
-                    </video>
-                </div>
-            {{else}}    
-                <div class="multi-media-content flex flex-align-center vs-none" step="{{this.step}}">
-                    <img class="imagePoster " src="{{this.filePath}}" alt="">
-                </div>
-            {{/if}}
+        {{#if (isVideo this.type)}}
+        <div class="multi-media-content" step="{{this.step}}">
+            <video class="videoPoster" autoplay loop muted>
+                <source src="{{this.filePath}}" type="video/mp4">
+            </video>
+        </div>
+        {{else}}
+        <div class="multi-media-content flex flex-align-center vs-none" step="{{this.step}}">
+            <img class="imagePoster " src="{{this.filePath}}" alt="">
+        </div>
+        {{/if}}
         {{/each}}
     </div>
     <div class="container position-absolute flex-wrap flex-align-center" id="blockOfDragElements">
@@ -29,8 +29,13 @@
                 <h2 class="text-shadow">BUILD YOUR FUTURE WITH US</h2>
                 <p class="text-shadow">Whatever the approach to development may be, the final
                     program must satisfy somefundamental properties</p>
-                <button class="base-btn-1" style="text-transform: uppercase;"><a href="#joinUS"><span style="font;">get
-                        started</span></a></button>
+                {{#if isThereASession}}
+                {{else}}
+                    <button class="base-btn-1" style="text-transform: uppercase;">
+                        <a href="#joinUS"><span style="font;">get started</span></a>
+                    </button>
+                {{/if}}
+                
             </div>
             <div id="countElements"></div>
         </div>
@@ -200,9 +205,9 @@
                 </div>
                 <div id="blockOfEngineersPhoto" class="container-item">
                     {{#each engineersMedia}}
-                        <div class="media">
-                            <img src="{{this}}" alt="img">
-                        </div>
+                    <div class="media">
+                        <img src="{{this}}" alt="img">
+                    </div>
                     {{/each}}
                 </div>
             </div>
@@ -293,7 +298,10 @@
             </button>
         </div>
     </div>
-    <div id="joinUS">
-        {{>signUp}}
-    </div>
+    {{#if isThereASession}}
+    {{else}}
+        <div id="joinUS">
+            {{>signUp}}
+        </div>
+    {{/if}}
 </main>
