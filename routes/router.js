@@ -62,7 +62,5 @@ router.get('/feedback', UserController.checkAuth, (req, res) => {
     name
   });
 })
-router.get('/404', (req, res) => {
-  res.render('404', {title: "404"})
-})
+
 module.exports = router;
