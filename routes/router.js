@@ -31,7 +31,7 @@ router.get('/', function (req, res, next) {
     })
     return images.length == 1 ? images[0] : images[Math.round(Math.random() * (images.length - 1))];
   }
-  console.log(designPhoto())
+
   res.render('layouts/index', {
     title: "YammyCode",
     posterMedia: posterMedia,

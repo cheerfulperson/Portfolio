@@ -12,7 +12,7 @@ function closeParentNode(parent) {
 }
 
 function sendToServer(parent, alertBlock, e) {
-
+    conosole.log(originUrl)
     postData(new URL('/users/signup', originUrl).href, formData(e.target))
         .then(data => {
 
@@ -81,6 +81,7 @@ if (loginForm) {
         e.preventDefault();
         postData(new URL('/users/login', originUrl).href, formData(e.target))
             .then(data => {
+                console.log(data    )
                 let alertBlock = e.target.parentNode.querySelector('div.alert');
                 alertBlock.style.cssText = null;
 

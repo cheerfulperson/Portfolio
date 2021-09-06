@@ -194,7 +194,7 @@ class UserController {
   }
 
 
-  async getAuth(req, res) { // TODO АВТОРИЗАЦИЯ
+  async getAuth(req, res, next, redir = false) { // TODO АВТОРИЗАЦИЯ
     let {
       email,
       psw,
@@ -246,18 +246,72 @@ class UserController {
             role: user.role,
             image: user.image
           }
-          res.send({
-            state: 200
-          })
+
+          if(redir){
+            res.redirect('/')
+          }else{
+            console.log('work')
+            res.json({
+              state: 200
+            })
+          }
+
         } else {
-          res.send({
-            state: 404
-          })
+          if(redir){
+            res.redirect('/')
+          }else{
+            res.send({
+              state: 404
+            })
+          }
         }
       })
       .catch(console.error)
   }
+  createQRURL(req, res){
+    let {email} = req.session.user;
+    User.getOne({email}).then(user => {
+      let url, pin = Math.round(Math.random() * 9999);
 
+      let encodeSession = encodeJson(JSON.stringify({
+        _id: req.sessionID,
+        email,
+        password: user.password,
+        pin
+      }), jwtKey, jwtOptions);
+
+      url = `${req.headers.host}/users/qr/verify?data=${encodeSession}`; // собираем ссылку
+
+      console.log(pin)
+      res.json({url});
+    }).catch(err => console.error(err));
+  }
+
+  checkQRAuth(req, res, next){
+    let data = req.query['data'],
+        pin = req.body.pin || null;
+    try {
+      let urlInfo = decodeJson(data, jwtKey, jwtOptions)
+  
+      if(pin != urlInfo.pin){
+        res.render('')
+      }else{
+        req.body = {
+          email: urlInfo.email,
+          psw: decryptCip(urlInfo.password, cryptoKey),
+          remember: 'on'
+        }
+        console.log(pin, urlInfo)
+        new UserController().getAuth(req, res, next, true);
+      }
+      
+    } catch (error) {
+      console.error("\x1b[31m", error);
+      next();
+    }
+
+
+  }
   async saveFeedback(req, res) {
     let formData = req.body;
     console.log(req.body.facebook)
