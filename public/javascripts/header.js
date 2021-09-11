@@ -3,7 +3,8 @@ const header = document.querySelector('header.Header'),
     navBar = document.getElementById('navBar'),
     blockIn = document.getElementById('regAndAuthBlock'),
     wrapMenu = document.getElementById('wrapMenu'),
-    personBlock = document.getElementById('personBlock');
+    personBlock = document.getElementById('personBlock'),
+    btnToShowQR = document.getElementById('qrIn');
 
 function openIn(id) {
     let elem = document.getElementById(id);
@@ -94,29 +95,110 @@ if (params) {
 })
 let avatarsBlock = [document.getElementById('userImage'), document.getElementById('avatarsChoice')];
 
-if(avatarsBlock[0]){
+if (avatarsBlock[0]) {
+    let interval;
+
+    function closeBlock(e) {
+        avatarsBlock[1].style.opacity = '0';
+
+        clearTimeout(interval);
+        interval = setTimeout(() => {
+            avatarsBlock[1].classList.add('vs-none');
+        }, 500)
+    }
+
+    function openBlock(e) {
+        if (e.target.id === 'userImage' && avatarsBlock[1].classList.contains('vs-none'))
+            avatarsBlock[1].classList.remove('vs-none');
+
+        clearTimeout(interval);
+        interval = setTimeout(() => {
+            avatarsBlock[1].style.opacity = '1';
+        }, 100)
+    }
 
     function chooseImage() {
         let block = avatarsBlock[1];
         for (let el of block.querySelectorAll('img')) {
             el.addEventListener('click', (e) => {
-                postData(new URL('/users/avatar', originUrl).href, {image: e.target.src}).then(res => {
-                    if(!res) return
-                    if(res.state === 200)
-                        location.reload();              
+                postData(new URL('/users/avatar', originUrl).href, {
+                    image: e.target.src
+                }).then(res => {
+                    if (!res) return
+                    if (res.state === 200)
+                        location.reload();
                 }).cacth(console.error)
             })
         }
     }
-    
+
+
     avatarsBlock.forEach(el => {
-        el.addEventListener('mouseenter', (e) => {
-            avatarsBlock[1].style.opacity = '1';
-    
+        ['touchenter', 'mouseenter'].forEach(event => {
+            el.addEventListener(event, e => {openBlock(e)})
         })
-        el.addEventListener('mouseleave', (e) => {
-            avatarsBlock[1].style.opacity = '0';
-        })
+
     })
+
+    avatarsBlock[1].addEventListener('mouseleave', (e) => closeBlock(e))
+    document.body.addEventListener('touchstart', (e) => {
+        if (e.target.id != 'userImage' && e.target.id != 'avatarsBlock' && e.target.id != 'avatarsChoice') closeBlock(e);
+        else openBlock(e);
+    })
+
+
     chooseImage();
+}
+
+if (btnToShowQR) {
+    btnToShowQR.addEventListener('click', e => {
+        let code = document.getElementById('code'),
+            qrblock = document.getElementById('qrblock'),
+            timeInfo = document.getElementById('timeInfo'),
+            deviceID = document.getElementById('deviceID'),
+            userAgentInfo = document.getElementById('userAgentInfo'),
+            btnReloadDeviceData = document.getElementById('reloadDeviceData');
+
+        addOrRemoveClassName(qrblock, 'vs-none');
+
+
+        function getDeviceData() {
+            $('div#qr').innerHTML = `<img src="https://acegif.com/wp-content/uploads/loading-25.gif" alt="load">`
+            postData(new URL('/users/auth/qrcode', originUrl).href, {}, 'GET')
+                .then(data => {
+                    if (!data) return;
+
+                    code.innerHTML = data.pin;
+                    $('div#qr').innerHTML = data.svg;
+                })
+                .catch(err => {
+                    console.error(err);
+                    $('div#qr').innerHTML = err;
+                })
+            let imgLoad = `<img width="20px" height="20px" src="https://acegif.com/wp-content/uploads/loading-25.gif" alt="load">`
+            timeInfo.innerHTML = imgLoad;
+            userAgentInfo.innerHTML = imgLoad;
+            deviceID.innerHTML = imgLoad;
+            postData(new URL('/users/device-data', originUrl).href, {}, 'GET')
+                .then(data => {
+                    if (!data) return;
+                    else if (data.state === 204) {
+                        timeInfo.innerHTML = "No information";
+                        userAgentInfo.innerHTML = "No information";
+                        deviceID.innerHTML = "No information";
+                    } else {
+                        timeInfo.innerHTML = data.time;
+                        userAgentInfo.innerHTML = data.userAgent;
+                        deviceID.innerHTML = data.ip;
+                    }
+                    console.log(data)
+                })
+                .catch(err => {
+                    console.error(err);
+
+                })
+        }
+        getDeviceData();
+        btnReloadDeviceData.addEventListener('click', getDeviceData);
+    })
 }

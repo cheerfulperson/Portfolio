@@ -1,16 +1,23 @@
+const {
+  rejects
+} = require('assert');
 const createError = require('http-errors'),
   User = require('../controllers/user.db.controller'),
   Feedback = require('../models/feedback.model'),
-
+  QRCode = require('qrcode'),
   {
     encryptCip,
-    decryptCip
+    decryptCip,
+    createPin
   } = require('../crypto-script'),
   {
     sign: encodeJson,
     verify: decodeJson
   } = require('jsonwebtoken'),
   sendMail = require('../models/nodemailer');
+const {
+  setTimeout
+} = require('timers');
 
 
 // * -----> session store
@@ -25,8 +32,82 @@ const jwtKey = process.env.JWT_SECRET_KEY,
 // ? -----> Keys
 const cryptoKey = process.env.CRYPTO_KEY;
 
-class UserController {
+class ArrayOfNewDevices extends Array {
 
+  addNoRepeat(device) {
+    if (this.length === 0) {
+      this.push(device);
+      return;
+    }
+
+    for (let el of this) {
+      if (el.sessionID !== device.sessionID)
+        this.push(device);
+      else
+        el = device;
+    }
+  }
+
+  async finedByID(sessionID) {
+    return new Promise((resolve, reject) => {
+      function fined(arr, times) {
+        if (times === 60 || !arr) {
+          resolve(null);
+          return;
+        }
+
+        let obj;
+        for (let el of arr) {
+          if (el.sessionID === sessionID)
+            obj = el;
+        }
+
+        if (!obj) {
+          setTimeout(() => {
+            times++;
+            fined(arr, times);
+          }, 1000)
+        } else {
+          resolve(obj);
+          return;
+        }
+      }
+      fined(this, 0)
+    });
+  }
+
+  removeByID(sessionID) {
+    let i = 0;
+    while (i < this.length) {
+      if (this[i].sessionID === sessionID) {
+        this.splice(i, 1);
+      } else {
+        ++i;
+      }
+    }
+  }
+}
+
+let arrOfNewDevices = new ArrayOfNewDevices();
+
+class Device {
+  constructor(_sessionID, IP, userAgent, time = new Date) {
+    this.sessionID = _sessionID;
+    this.ip = IP;
+    this.userAgent = userAgent;
+    this.time = time;
+  }
+}
+
+class UserController {
+  checkAuthorize(req, res, next){
+    store.get(req.sessionID, (err, session) => {
+      if (err) console.error(err);
+
+      if ((session && !session.user) || !session) next();
+      else next(createError(404));
+    })
+  }
   checkAuth(req, res, next) {
     store.get(req.sessionID, (err, session) => {
       if (err) console.error(err);
@@ -49,7 +130,7 @@ class UserController {
 
     User.getOne({
         email: formData ? formData.email : null
-      })  
+      })
       .then(async user => {
         let passedTime;
         if (req.session.unidentifiedUser) {
@@ -139,7 +220,7 @@ class UserController {
     let encodeSession = await req.query['data'];
 
     try {
-      decode = await decodeJson(encodeSession, jwtKey, jwtOptions);
+      decode = decodeJson(encodeSession, jwtKey, jwtOptions);
       store.get(decode._id, (err, session) => {
         if (err) console.error(err)
         if (session && session.unidentifiedUser) {
@@ -192,7 +273,6 @@ class UserController {
       next(createError(404));
     }
   }
-
 
   async getAuth(req, res, next, redir = false) { // TODO АВТОРИЗАЦИЯ
     let {
@@ -247,31 +327,61 @@ class UserController {
             image: user.image
           }
 
-          if(redir){
-            res.redirect('/')
-          }else{
-            console.log('work')
+          if (redir) {
+            res.redirect('/');
+          } else {
             res.json({
               state: 200
             })
           }
-
         } else {
-          if(redir){
-            res.redirect('/')
-          }else{
+          if (redir) {
+            res.redirect('/');
+          } else {
             res.send({
               state: 404
             })
           }
         }
       })
-      .catch(console.error)
+      .catch(console.error);
   }
-  createQRURL(req, res){
-    let {email} = req.session.user;
-    User.getOne({email}).then(user => {
-      let url, pin = Math.round(Math.random() * 9999);
+
+  getCheckPinPage(req, res, next) {
+    try {
+      let _sessionID = decodeJson(req.query['data'], jwtKey, jwtOptions)._id;
+
+      arrOfNewDevices.addNoRepeat(new Device(_sessionID, req.socket._peername.address, req.headers['user-agent']));
+
+      res.render('layouts/pin', {
+        title: 'pin'
+      })
+    } catch (error) {
+      console.error("\x1b[31m", error);
+      next();
+    }
+
+  };
+
+  async getNewDeviceInfo(req, res, next) {
+    console.log(arrOfNewDevices)
+    await arrOfNewDevices.finedByID(req.sessionID).then(data => {
+      if (data) res.json(data);
+      else res.json({
+        state: 204
+      });
+    })
+
+  }
+
+  createQRURL(req, res, next) {
+    let {
+      email
+    } = req.session.user;
+    User.getOne({
+      email
+    }).then(user => {
+      let url, pin = createPin(4);
 
       let encodeSession = encodeJson(JSON.stringify({
         _id: req.sessionID,
@@ -279,39 +389,56 @@ class UserController {
         password: user.password,
         pin
       }), jwtKey, jwtOptions);
-
-      url = `${req.headers.host}/users/qr/verify?data=${encodeSession}`; // собираем ссылку
-
       console.log(pin)
-      res.json({url});
-    }).catch(err => console.error(err));
+      url = `http://${require('os').networkInterfaces()['Беспроводная сеть'][1].address}:${process.env.PORT}/users/qr/verify?data=${encodeSession}`; // собираем ссылку
+      QRCode.toString(url, {
+        type: 'svg'
+      }, function (err, svg) {
+        res.json({
+          svg,
+          pin
+        });
+      });
+    }).catch(err => {
+      console.error(err)
+      next();
+    });
   }
 
-  checkQRAuth(req, res, next){
+  checkQRAuth(req, res, next) {
     let data = req.query['data'],
-        pin = req.body.pin || null;
+      pin = req.body.pin || null;
     try {
-      let urlInfo = decodeJson(data, jwtKey, jwtOptions)
-  
-      if(pin != urlInfo.pin){
-        res.render('')
-      }else{
+      let urlInfo = decodeJson(data, jwtKey, jwtOptions);
+
+      if (pin != urlInfo.pin) {
+        res.render('layouts/pin', {
+          title: 'Error',
+          error: true
+        })
+      } else {
         req.body = {
           email: urlInfo.email,
           psw: decryptCip(urlInfo.password, cryptoKey),
           remember: 'on'
         }
-        console.log(pin, urlInfo)
-        new UserController().getAuth(req, res, next, true);
+        console.log(pin, urlInfo)  
+        
+        arrOfNewDevices.removeByID(urlInfo._id);     
+        if(req.session && !req.session.user){
+          new UserController().getAuth(req, res, next, true);
+        }else{
+          next()
+        }
+
       }
-      
+
     } catch (error) {
       console.error("\x1b[31m", error);
       next();
     }
-
-
   }
+
   async saveFeedback(req, res) {
     let formData = req.body;
     console.log(req.body.facebook)
@@ -334,12 +461,18 @@ class UserController {
       })
   }
 
-  uploadAvatar(req, res){
+  uploadAvatar(req, res) {
     let image = req.body.image;
     console.log()
-    User.updateOne({_id: req.session.user.id}, {image});
+    User.updateOne({
+      _id: req.session.user.id
+    }, {
+      image
+    });
     req.session.user.image = image;
-    res.send({state: 200});
+    res.send({
+      state: 200
+    });
   }
 
   async deleteUserSession(req, res) { // ? Выход из аккаунта

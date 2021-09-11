@@ -620,7 +620,7 @@ div#wrapMenu.category-wrap {
 
       button {
         width: 100%;
-        margin-top: 30px;
+        margin-top: 5px;
         height: 30px;
         border-radius: 5px;
 
@@ -1356,6 +1356,70 @@ footer.Footer {
   }
 }
 
+// ? ------> qr Block 
+div#qrblock{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  background: #000000e5;
+  div.close{
+    max-width: var(--max-width);
+    width: 100%;
+    button{
+      float: right;
+      margin-right: 50px;
+      border: 2px solid white;
+      padding: 3px;
+      border-radius: 5px;
+      width: 43px;
+      height: 43px;
+      transition: opacity 0.4s;     
+    }
+    button:hover{
+      opacity: 0.6;
+    }
+  }
+  ul{
+    list-style-type: none;
+    li{
+      max-width: 600px;
+      padding: 0px 20px 0px 20px;
+      width: 100%;
+      p{
+        text-align: left;
+      }
+      span{
+        @include textFont($size: 20px, $font-weight: 400);
+      }
+      span#code{
+        font-size: 24px;
+        line-height: 24px;
+        color: gold;
+      }
+    }
+  }
+  div#qr{
+    max-width: 600px;
+    width: 100%;
+    svg {
+      display: block;
+      margin: auto;
+      width: 50%;
+    }
+    img{
+      display: block;
+      margin: 100px auto 100px auto;
+      width: 25%;
+     
+    }
+  }
+}
 
 // ? ------> alert dialog
 

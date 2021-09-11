@@ -44,6 +44,17 @@ class ModernCrypto {
         decipher.end();
         return decrypted;
     };
+
+    createPin(amount){
+        function getPin(){
+            let pin = Math.round(Math.random() * 9999);
+            if(pin.toString().length !== amount)
+                return getPin();
+            else 
+                return pin;
+        }
+        return getPin();
+    };
 }
 
 module.exports = new ModernCrypto;
