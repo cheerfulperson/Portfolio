@@ -13,5 +13,7 @@ router.route('/qr/verify')
     .get(UserController.getCheckPinPage)
     .post(UserController.checkQRAuth)
 router.use('/device-data', UserController.checkAuth, UserController.getNewDeviceInfo);
-
+router.use('/chat', UserController.checkAuth, (req, res, next) => {
+    res.render('layouts/chat', {title: 'Chat'});
+});
 module.exports = router;

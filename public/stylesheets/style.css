@@ -42,6 +42,7 @@ body {
   left: 0;
   min-height: 100vh;
   font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
   background: var(--main-color-1); }
 
 h2 {
@@ -987,60 +988,63 @@ footer.Footer {
 
 div#qrblock {
   position: fixed;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  padding: 20px 0px 0px 0px;
+  overflow-y: auto;
   top: 0;
   width: 100%;
   height: 100%;
   z-index: 50;
   background: #000000e5; }
-  div#qrblock div.close {
-    max-width: var(--max-width);
-    width: 100%; }
-    div#qrblock div.close button {
-      float: right;
-      margin-right: 50px;
-      border: 2px solid white;
-      padding: 3px;
-      border-radius: 5px;
-      width: 43px;
-      height: 43px;
-      transition: opacity 0.4s; }
-    div#qrblock div.close button:hover {
-      opacity: 0.6; }
-  div#qrblock ul {
-    list-style-type: none; }
-    div#qrblock ul li {
-      max-width: 600px;
-      padding: 0px 20px 0px 20px;
+  div#qrblock div.main-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+    div#qrblock div.main-block div.close {
+      max-width: var(--max-width);
       width: 100%; }
-      div#qrblock ul li p {
-        text-align: left; }
-      div#qrblock ul li span {
-        font-family: 'Roboto', sans-serif;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 20px;
-        text-align: center;
-        color: var(--main-color-3); }
-      div#qrblock ul li span#code {
-        font-size: 24px;
-        line-height: 24px;
-        color: gold; }
-  div#qrblock div#qr {
-    max-width: 600px;
-    width: 100%; }
-    div#qrblock div#qr svg {
-      display: block;
-      margin: auto;
-      width: 50%; }
-    div#qrblock div#qr img {
-      display: block;
-      margin: 100px auto 100px auto;
-      width: 25%; }
+      div#qrblock div.main-block div.close button {
+        float: right;
+        margin-right: 50px;
+        border: 2px solid white;
+        padding: 3px;
+        border-radius: 5px;
+        width: 43px;
+        height: 43px;
+        transition: opacity 0.4s; }
+      div#qrblock div.main-block div.close button:hover {
+        opacity: 0.6; }
+    div#qrblock div.main-block ul {
+      list-style-type: none; }
+      div#qrblock div.main-block ul li {
+        max-width: 600px;
+        padding: 0px 20px 0px 20px;
+        width: 100%; }
+        div#qrblock div.main-block ul li p {
+          text-align: left; }
+        div#qrblock div.main-block ul li span {
+          font-family: 'Roboto', sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 20px;
+          text-align: center;
+          color: var(--main-color-3); }
+        div#qrblock div.main-block ul li span#code {
+          font-size: 24px;
+          line-height: 24px;
+          color: gold; }
+    div#qrblock div.main-block div#qr {
+      max-width: 600px;
+      width: 100%; }
+      div#qrblock div.main-block div#qr svg {
+        display: block;
+        margin: auto;
+        width: 50%; }
+      div#qrblock div.main-block div#qr img {
+        display: block;
+        margin: 100px auto 100px auto;
+        width: 25%; }
 
 .alert {
   margin: auto;
