@@ -1,0 +1,87 @@
+<div class="container">
+    <div id="formPin">
+        <form id="codeSender" action="" method="POST">
+            {{#if error}}<p id="wrg" style="color: red;">Wrong pin!!!</p>{{/if}}
+            <div>
+                <input id="pin"
+                    type="number" name="pin" placeholder="pin" autocomplete="off" autocapitalize="off" required
+                    autofocus>
+            </div>
+            <button class="base-btn-1" style="margin: 20px 0 0 0; width: 50%" type="submit">go</button>
+        </form>
+    </div>
+</div>
+<style>
+    div#formPin {
+        max-width: 600px;
+        width: 100%;
+        height: 400px;
+        margin: 150px auto 50px auto;
+    }
+
+    div#formPin form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    div#formPin label {
+        display: block;
+        text-align: center;
+        margin: 20px 0 10px 0;
+    }
+
+    div#formPin form div input {
+        display: block;
+        text-align: center;
+        outline: none;
+        background: none;
+        border: none;
+        border-radius: 5px;
+        height: 50px;
+        box-shadow: inset 0 0 3px 0px #FFFFFF;
+        appearance: none;
+    }
+
+    .err {
+        box-shadow: inset 0 0 3px 0px red;
+        color: red;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+</style>
+<script>
+    let code, re = /^[\b0-9]$/;
+    ['keyup'].forEach(el => {
+        document.getElementById('pin').addEventListener(el, e => {
+            let pin = e.target.value;
+
+
+            if (re.test(e.key) && pin.length <= 4 || e.keyCode === 8) {
+                code = pin;
+            } else {
+                e.target.value = code;
+                e.target.animate([
+                    // keyframes
+                    {
+                        transform: 'rotate(5deg)'
+                    },
+                    {
+                        transform: 'rotate(0deg)'
+                    },
+                    {
+                        transform: 'rotate(-5deg)'
+                    }
+                ], {
+                    // timing options
+                    duration: 100,
+                    iterations: 1,
+                    easing: "cubic-bezier(0.42, 0, 0.58, 1)"
+                });
+            }
+        })
+    })
+</script>
