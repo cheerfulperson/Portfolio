@@ -59,15 +59,11 @@ app.use(sassMiddleware({
 }));
 app.use(compress());
 app.use(express.static(join(__dirname, 'public')));
-app.use(require('express-session')({
-  store: store,
-  secret: sessionKey,
-  proxy: true,
-  resave: true,
-  saveUninitialized: false
-}))
+
+app.use(require('./controllers/session.controller')); // * use session function 
+
+
 app.use((req, res, next) => {
-  
 
     hbs.registerHelper('setParams', (block) => {
 
@@ -85,7 +81,7 @@ app.use((req, res, next) => {
 
   req.siteDescription = JSON.parse(readFileSync(__dirname + '/site-description.json', 'utf-8'));
   next();
-})
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const User = require('../models/user.model');
 
 const connectToDb = cb => {
     mongoose.connect(process.env.MONGO_CONNECTION_STRING, {

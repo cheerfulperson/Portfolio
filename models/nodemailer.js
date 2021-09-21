@@ -14,7 +14,6 @@ const sendMail = async massage => {
     });
 
     const info = await transporter.sendMail(massage); // отправка сообщения
-
     
     console.log('Message sent successfully!');
     console.log(nodemailer.getTestMessageUrl(info));

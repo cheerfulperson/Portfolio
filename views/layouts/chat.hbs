@@ -2,7 +2,7 @@
     <div id="chatInfo">
         <div id="searchPanel">
             <div id="closeSearchPanel" class="flex flex-row-center flex-align-center">
-                <button class="flex flex-row-center flex-align-center">
+                <button id="closeChatInfo" class="flex flex-row-center flex-align-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="gray" class="bi bi-x-lg"
                         viewBox="0 0 16 16">
                         <path
@@ -36,6 +36,15 @@
     <div id="chatMessanger" class="position-relative">
         <div class="chat-header container position-absolute">
             <div class="chat-info">
+                <div class="btn-open"><button id="openChatInfo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-journals" viewBox="0 0 16 16">
+                            <path
+                                d="M5 0h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2 2 2 0 0 1-2 2H3a2 2 0 0 1-2-2h1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1H1a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1H3a2 2 0 0 1 2-2z" />
+                            <path
+                                d="M1 6v-.5a.5.5 0 0 1 1 0V6h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V9h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 2.5v.5H.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H2v-.5a.5.5 0 0 0-1 0z" />
+                        </svg>
+                    </button></div>
                 <div class="user-image">
                     <img src="/media/images/avatars/a2.png" alt="">
                 </div>
@@ -58,12 +67,14 @@
             <div class="chat-block position-relative">
                 <div class="ms">
                     <div id="messagesBlock">
-                    <div class="ms-left"><span class="text">Hi!</span><span class="time">12:23</span></div>
-                    <div class="ms-left"><span class="text">What's up?</span><span class="time">12:23</span></div>
-                    <div class="ms-right"><span class="text">Hey!</span><span class="time">12:23</span></div>
-                    <div class="ms-right"><span class="text">All fine? And you?</span><span class="time">12:24</span></div>
-                    <div class="ms-right"><span class="text">Hi! What took you so long?</span><span class="time">12:24</span></div>
-                </div>
+                        <div class="ms-left"><span class="text">Hi!</span><span class="time">12:23</span></div>
+                        <div class="ms-left"><span class="text">What's up?</span><span class="time">12:23</span></div>
+                        <div class="ms-right"><span class="text">Hey!</span><span class="time">12:23</span></div>
+                        <div class="ms-right"><span class="text">All fine? And you?</span><span
+                                class="time">12:24</span></div>
+                        <div class="ms-right"><span class="text">Hi! What took you so long?</span><span
+                                class="time">12:24</span></div>
+                    </div>
                 </div>
                 <div id="typer" class="position-absolute">
                     <textarea type="text" name="typer" id="" placeholder="Typing"></textarea>

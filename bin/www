@@ -5,10 +5,11 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('portfolio:server');
-var http = require('http');
-const connectToDb = require('../db/mongoDB.config')
+const app = require('../app');
+const debug = require('debug')('portfolio:server');
+const http = require('http');
+const connectToDb = require('../db/mongoDB.config');
+
 /**
  * Get port from environment and store in Express.
  */
@@ -27,9 +28,13 @@ var server = http.createServer(app);
  */
 
 connectToDb(() => { // Подключение mongoDb к express
+  server.on('upgrade', (req, socket, head) => {
+    require('../models/ws.config').upgradeSocket(req, socket, head);
+  })
   server.listen(port, '0.0.0.0');
   server.on('error', onError);
   server.on('listening', onListening);
+
 })
 
 /**
@@ -89,7 +94,7 @@ function onListening() {
   var bind = typeof addr === 'string' ?
     'pipe ' + addr :
     'port ' + addr.port;
-    
+
   console.log(`Server created on http://127.0.0.1:${addr.port}`);
   debug('Listening on ' + bind);
 }
