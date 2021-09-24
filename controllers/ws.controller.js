@@ -32,7 +32,6 @@ const upgradeSocket = (req, socket, head) => {
 
 wss.on('connection', (ws, req) => {
     console.log('wss is opened!');
-    // console.log(require('uuid').v1());
     try {
         Users.getOne({
                 _id: req.session.user.id
