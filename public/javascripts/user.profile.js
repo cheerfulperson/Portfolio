@@ -12,7 +12,7 @@ function closeParentNode(parent) {
 }
 
 function sendToServer(parent, alertBlock, e) {
-    conosole.log(originUrl)
+
     postData(new URL('/users/signup', originUrl).href, formData(e.target))
         .then(data => {
 
@@ -56,7 +56,6 @@ function sendToServer(parent, alertBlock, e) {
                 closeParentNode(alertBlock);
                 addOrRemoveClassName(wrongInput, 'wrong-input');
             }, 15000);
-            console.log('Success:', data);
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -81,7 +80,6 @@ if (loginForm) {
         e.preventDefault();
         postData(new URL('/users/login', originUrl).href, formData(e.target))
             .then(data => {
-                console.log(data    )
                 let alertBlock = e.target.parentNode.querySelector('div.alert');
                 alertBlock.style.cssText = null;
 
@@ -106,8 +104,6 @@ if (loginForm) {
                 } else if (data.state === 200) {
                     window.location.replace(location.origin);
                 }
-
-                console.log(data)
             })
             .catch(console.error);
     })
@@ -176,8 +172,6 @@ if (feedbackForm) {
                     }, 15000);
                 }
                 alertBlock.classList.remove('vs-none');
-                
-                console.log(data)
             })
             .catch(console.error);
     })

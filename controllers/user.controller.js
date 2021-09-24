@@ -1,8 +1,6 @@
-const {
-  rejects
-} = require('assert');
+const UserModel = require('../models/user.model');
 const createError = require('http-errors'),
-  User = require('../controllers/user.db.controller'),
+  UserDBController = new require('../controllers/user.db.controller'),
   Feedback = require('../models/feedback.model'),
   QRCode = require('qrcode'),
   {
@@ -19,6 +17,8 @@ const {
   setTimeout
 } = require('timers');
 
+// * -----> constructor user model DB
+const User = new UserDBController(UserModel);
 
 // * -----> session store
 const store = require('../db/session.db.config');

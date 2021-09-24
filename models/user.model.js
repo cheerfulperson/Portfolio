@@ -7,21 +7,25 @@ const userScheme = new mongoose.Schema(
     {
         name: String,
         email: String,
+        password: String,
+        chats: Array,
         role: {
-            type: String,
-            default: "user"
+            type: Number,
+            default: 0
         },
         image: {
             type: String,
             default: "/media/images/avatars/a1.png" 
         },
-        password: String,
         _id: {
             type: String,
             default: createId
         }
     }, 
-    {versionKey: false} 
+    {
+        versionKey: false,
+        collection: 'users'
+    } 
 );
 
 const User = mongoose.model("User", userScheme);

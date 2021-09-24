@@ -29,7 +29,7 @@ var server = http.createServer(app);
 
 connectToDb(() => { // Подключение mongoDb к express
   server.on('upgrade', (req, socket, head) => {
-    require('../models/ws.config').upgradeSocket(req, socket, head);
+    require('../controllers/ws.controller').upgradeSocket(req, socket, head);
   })
   server.listen(port, '0.0.0.0');
   server.on('error', onError);

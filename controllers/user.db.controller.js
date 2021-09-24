@@ -1,19 +1,25 @@
 const User = require('../models/user.model');
 
-const getAll = async () => {
-    return User.find({});
+class DBModelController {
+    constructor(Model = {}){
+        this.Model = Model;
+    }
+    async getAll(filds){
+        return this.Model.find({}, filds);
+    }
+    async searchAll(options, filds){
+        return this.Model.find(options, filds);
+    }
+    async getOne(options) {
+        return this.Model.findOne(options);
+    }
+    async addOne(user) {
+        return this.Model.create(user);
+    }
+    async updateOne(filter, data){
+        return this.Model.updateOne(filter, data);
+    }
+    
 }
 
-const getOne = async options => {
-    return User.findOne(options);
-}
-
-const addOne = async user => {
-    return User.create(user);
-}
-
-const updateOne = async (filter, data) => {
-    return User.updateOne(filter, data);
-}
-
-module.exports = { getAll, getOne, addOne, updateOne }
+module.exports = DBModelController;
